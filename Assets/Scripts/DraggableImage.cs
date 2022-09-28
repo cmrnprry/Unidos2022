@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class DraggableImage : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private bool _dragging;
-    private RectTransform rectTransform;
+    public RectTransform rectTransform;
     private float halfWidth;
     private float halfHeight;
     void Start()
@@ -18,12 +18,12 @@ public class DraggableImage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         halfHeight = rectTransform.rect.height / 2;
 
     }
-    public void OnPointerDown(PointerEventData data)
+    public virtual void OnPointerDown(PointerEventData data)
     {
         _dragging = true;
     }
 
-    public void OnPointerUp(PointerEventData data)
+    public virtual void OnPointerUp(PointerEventData data)
     {
         _dragging = false;
         //Better to do this once, rather than every frame

@@ -9,6 +9,8 @@ public class RecipeItem : DraggableImage
     public Food? transformed;
 
     public Vector3 lastPosition;
+    public GameObject choppyBlock;
+    public bool isChopping;
     public void OnChopped()
     {
         current = transformed.Value;
@@ -30,5 +32,10 @@ public class RecipeItem : DraggableImage
     {
         KitchenManager.Instance.CheckStep(current);
         transform.position = lastPosition;
+        if(isChopping)
+        {
+            //set us to our block
+            this.transform.SetParent(choppyBlock.transform);
+        }
     }
 }

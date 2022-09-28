@@ -10,11 +10,12 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject OrigParent;
     public RectTransform rectTransform;
 
+    public bool isChopper;
     public void Start()
     {
         rectTransform = GetComponent<RectTransform>();
     }
-    //on overlap ask if we fulfill recipe step
+
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         if (KitchenManager.Instance.HasItem())
@@ -23,20 +24,15 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             KitchenManager.Instance.ChangeLastToolHovered(this);
             transform.SetParent(tempParent.transform);
         }
-        //Output to console the GameObject's name and the following message
         
     }
-
-    //Detect when Cursor leaves the GameObject
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        //Output the following message with the GameObject's name
         Debug.Log("Cursor Exiting " + name + " GameObject");
 
     }
     public void SetOrigParent()
     {
-
         transform.SetParent(OrigParent.transform);
     }
 }

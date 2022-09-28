@@ -40,6 +40,8 @@ public class KitchenManager : Singleton<KitchenManager>
     public KitchenTool? lastToolHovered;
     public RecipeItem? currentItem;
 
+    public RecipeItem? choppingItem;
+
     private string debugTxt = "food - {0} spot - {1}"; 
     public TextMeshProUGUI textbox;
     //not terribly happy about how this works but idk it works i guess
@@ -59,25 +61,35 @@ public class KitchenManager : Singleton<KitchenManager>
         }
     }
     //wait for step to finish -- 
-
+    //oops all side effects
     public void CheckStep(Food food)
     {
-        //hate this but gotta love that it works
-        Vector3[] corners = new Vector3[4];
-        currentItem.rectTransform.GetWorldCorners(corners);
-        Rect rec1 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
+        if(lastToolHovered != null)
+        {
+            //hate this but gotta love that it works
+            Vector3[] corners = new Vector3[4];
+            currentItem.rectTransform.GetWorldCorners(corners);
+            Rect rec1 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
 
-        lastToolHovered.rectTransform.GetWorldCorners(corners);
-        Rect rec2 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
-        
-        if (rec1.Overlaps(rec2)){
-            if (currentStep.startedFood == food && currentStep.neededSpot == lastToolHovered?.point)
+            lastToolHovered.rectTransform.GetWorldCorners(corners);
+            Rect rec2 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
+
+            if (rec1.Overlaps(rec2))
             {
-                waitingForNextStep = true;
-                //update tool to be next image?
+                if (currentStep.startedFood == food && currentStep.neededSpot == lastToolHovered?.point)
+                {
+                    if(lastToolHovered.isChopper)
+                    {
+                        currentItem.lastPosition = lastToolHovered.transform.position;
+                        currentItem.isChopping = true;
+                        choppingItem = currentItem;
+                    }
+                    waitingForNextStep = true;
+                    //update tool to be next image?
+                }
             }
         }
-       
+        
         ResetToolHovered();
     }
     public void ResetToolHovered()
@@ -111,6 +123,11 @@ public class KitchenManager : Singleton<KitchenManager>
             currentStep = recipeSteps[0];
             recipeSteps.RemoveAt(0);
             textbox.text = string.Format(debugTxt, currentStep.startedFood, currentStep.neededSpot);
+            if(currentStep.isChoppingGame)
+            {
+                //set active chopping minigame?
+                textbox.text = "time to chop";
+            }
         }
         else
         {

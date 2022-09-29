@@ -11,8 +11,10 @@ public class RecipeItem : DraggableImage
     public Food transformed;
 
     public Vector3 lastPosition;
+    public GameObject OrigParent;
     public GameObject choppyBlock;
     public bool isChopping;
+    
 
     public Image curImage;
     public TextMeshProUGUI tbox;
@@ -24,6 +26,11 @@ public class RecipeItem : DraggableImage
         //set image to new image
         curImage.color = Color.green;
         tbox.text = transformed.ToString();
+        transform.SetParent(OrigParent.transform);
+        var tmpPos = transform.position;
+        var tmpVec = new Vector3(0, -100);
+        lastPosition = tmpPos - tmpVec;
+        transform.position = lastPosition;
     }
     public override void OnPointerDown(PointerEventData data)
     {
@@ -53,6 +60,12 @@ public class RecipeItem : DraggableImage
             //set us to our block
             this.transform.SetParent(choppyBlock.transform);
         }
+    }
+
+    public void HideFood()
+    {
+        lastPosition = KitchenManager.Instance.hideSpot.transform.position;
+        transform.position = lastPosition;
     }
 
 

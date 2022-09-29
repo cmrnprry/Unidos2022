@@ -11,6 +11,7 @@ public class ChoppingMinigame : MonoBehaviour
     public UIParticle particles;
 
     public int chopsLeft;
+    
 
     void Start()
     {

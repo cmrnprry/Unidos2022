@@ -32,6 +32,7 @@ public enum KitchenPoint
 }
 public class KitchenManager : Singleton<KitchenManager>
 {
+    public GameObject hideSpot;
 
     public List<RecipeStepScriptableObject> recipeSteps;
     public RecipeStepScriptableObject currentStep;
@@ -85,6 +86,11 @@ public class KitchenManager : Singleton<KitchenManager>
                         currentItem.lastPosition = lastToolHovered.transform.position;
                         currentItem.isChopping = true;
                         choppingItem = currentItem;
+                    }
+                    if(currentStep.shouldMove)
+                    {
+                        //hide item?
+                        currentItem.HideFood();
                     }
                     waitingForNextStep = true;
                     //update tool to be next image?
@@ -144,5 +150,6 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         choppingItem.OnChopped();
         choppingItem = null;
+        waitingForNextStep = true;
     }
 }

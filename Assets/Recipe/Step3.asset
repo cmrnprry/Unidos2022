@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c66b4d3507ecb4d84678557a72d9f9, type: 3}
   m_Name: Step3
   m_EditorClassIdentifier: 
-  startedFood: 2
+  startedFood: 4
   neededSpot: 3
-  isDone: 0
+  isChoppingGame: 0

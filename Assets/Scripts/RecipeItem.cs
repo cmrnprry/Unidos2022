@@ -18,15 +18,22 @@ public class RecipeItem : DraggableImage
     }
     public override void OnPointerDown(PointerEventData data)
     {
-        base.OnPointerDown(data);
-        lastPosition = transform.position;
-        KitchenManager.Instance.SetCurrentItem(this);
+        if (!isChopping)
+        {
+            base.OnPointerDown(data);
+            lastPosition = transform.position;
+            KitchenManager.Instance.SetCurrentItem(this);
+        }
+        
     }
     public override void OnPointerUp(PointerEventData data)
     {
-        base.OnPointerUp(data);
-        OverlapCheck(data);
-        KitchenManager.Instance.ResetItem();
+        if (!isChopping)
+        {
+            base.OnPointerUp(data);
+            OverlapCheck(data);
+            KitchenManager.Instance.ResetItem();
+        }
     }
     public void OverlapCheck(PointerEventData data)
     {

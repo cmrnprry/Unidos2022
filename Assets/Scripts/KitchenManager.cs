@@ -44,6 +44,8 @@ public class KitchenManager : Singleton<KitchenManager>
 
     private string debugTxt = "food - {0} spot - {1}"; 
     public TextMeshProUGUI textbox;
+
+    public ChoppingMinigame mg;
     //not terribly happy about how this works but idk it works i guess
     void Start()
     {
@@ -127,6 +129,7 @@ public class KitchenManager : Singleton<KitchenManager>
             {
                 //set active chopping minigame?
                 textbox.text = "time to chop";
+                mg.startMinigame = true;
             }
         }
         else
@@ -135,5 +138,11 @@ public class KitchenManager : Singleton<KitchenManager>
             textbox.text = "Done!";
         }
         
+    }
+
+    public void ChopDone()
+    {
+        choppingItem.OnChopped();
+        choppingItem = null;
     }
 }

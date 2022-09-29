@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RecipeItem : DraggableImage
 {
     public Food current;
-    public Food? transformed;
+    public Food transformed;
 
     public Vector3 lastPosition;
     public GameObject choppyBlock;
     public bool isChopping;
+
+    public Image curImage;
+    public TextMeshProUGUI tbox;
     public void OnChopped()
     {
-        current = transformed.Value;
+        current = transformed;
+        isChopping = false;
+
         //set image to new image
+        curImage.color = Color.green;
+        tbox.text = transformed.ToString();
     }
     public override void OnPointerDown(PointerEventData data)
     {
@@ -45,4 +54,6 @@ public class RecipeItem : DraggableImage
             this.transform.SetParent(choppyBlock.transform);
         }
     }
+
+
 }

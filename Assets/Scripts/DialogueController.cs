@@ -22,7 +22,6 @@ public class DialogueController : MonoBehaviour
     [Header("Ink")]
     public TextAsset ink;
     public float wait = 0.15f;
-    private float fontSize = 36;
     private Story story;
     private List<string> currentTags = new List<string>();
 
@@ -30,13 +29,26 @@ public class DialogueController : MonoBehaviour
 
     [Header("TextBoxes")]
     public TextMeshProUGUI textbox;
-    public GameObject friend;
+
 
     [Header("Dialogue")]
     private bool isTyping;
-    private string effect;
-    private float value;
-    private Vector3 original;
+    public bool WaitFor;
+    public Sprite[] heads;
+    public GameObject exclaimation;
+    private string side = "";
+
+    [Header("Scenes")]
+    public GameObject junk;
+    public GameObject living;
+    public GameObject kitchen;
+
+    //make this a singleton
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
 
     private void Start()
     {
@@ -44,19 +56,28 @@ public class DialogueController : MonoBehaviour
         coroutine = StartCoroutine(ShowNextLine());
     }
 
-
     private IEnumerator ShowNextLine()
     {
+        if (WaitFor)
+            yield return new WaitUntil(() => !WaitFor);
+
+        if (exclaimation.activeSelf)
+        {
+            //transition logic
+            //hide
+            exclaimation.SetActive(false);
+            //show
+        }
+
         if (story.canContinue)
         {
             string nextLine = story.Continue().Trim();
             currentTags = story.currentTags;
 
-            //if (currentTags.Count > 0)
-            //{
-            //    CheckTags();
-            //}
-
+            if (currentTags.Count > 0)
+            {
+                CheckTags();
+            }
 
             coroutine = StartCoroutine(incrementText(nextLine, textbox));
         }
@@ -69,102 +90,41 @@ public class DialogueController : MonoBehaviour
 
     }
 
-    //private void CheckTags()
-    //{
-    //    foreach (string tag in currentTags)
-    //    {
-    //        string[] split = tag.Split(',', StringSplitOptions.RemoveEmptyEntries);
-    //        string effect = split[0];
-    //        float v = (split.Length > 1) ? float.Parse(split[1]) : -1;
-    //        switch (effect)
-    //        {
-    //            case "speed":
-    //                ChangeTextSpeed(v);
-    //                break;
+    private void CheckTags()
+    {
+        foreach (string tag in currentTags)
+        {
+            tag.ToLower().Replace(" ", "");
+            string[] split = tag.Split(':', StringSplitOptions.RemoveEmptyEntries);
+            string TAG = split[0];
+            switch (TAG)
+            {
+                case "speaker":
+                    string character = split[1];
+                    break;
 
-    //            case "size":
-    //                ChangeTextSize(v, textbox);
-    //                break;
+                case "prompt":
+                    side = split[1];
+                    //set the side
+                    exclaimation.SetActive(true);
+                    WaitFor = true;
+                    break;
 
-    //            case "increasing size":
-    //                this.effect = "size";
-    //                value = v;
-    //                break;
+                case "WaitUntil":
+                    WaitFor = true;
+                    break;
 
-    //            default:
-    //                Debug.LogError($"Text Effect Not Found: {effect}");
-    //                break;
-    //        }
+                default:
+                    Debug.LogError($"Tag not found: {TAG}");
+                    break;
+            }
+        }
+    }
 
-
-    //    }
-    //}
-
-    //private void ChangeTextSpeed(float value)
-    //{
-    //    if (value < 0)
-    //    {
-    //        wait = 0.15f;
-    //    }
-    //    else
-    //    {
-    //        wait = value;
-    //    }
-    //}
-
-    //private void ChangeTextSize(float value, TMP_Text currentTextbox)
-    //{
-    //    fontSize = currentTextbox.fontSize;
-    //    currentTextbox.fontSize *= value;
-    //}
-
-    //private void IncreasingTextSize(float end, TMP_Text currentTextbox, string text, TMP_TextInfo info)
-    //{
-    //    float start = currentTextbox.fontSize;
-    //    float difference = Mathf.Abs(end - start);
-
-    //    char[] characters = text.ToCharArray();
-    //    int index = 0;
-
-    //    TMP_MeshInfo[] cachedMeshInfo = info.CopyMeshInfoVertexData();
-    //    foreach (char c in characters)
-    //    {
-    //        if (Char.IsWhiteSpace(c))
-    //        {
-    //            continue;
-    //        }
-
-    //        int materialIndex = info.characterInfo[index].materialReferenceIndex;
-    //        Vector3[] destinationVertices = info.meshInfo[materialIndex].vertices;
-    //        Vector3[] sourceVertices = cachedMeshInfo[materialIndex].vertices;
-    //        int vertexIndex = info.characterInfo[index].vertexIndex;
-
-
-    //        float charSize =  Mathf.Max(0.375f, index / (float)characters.Length);
-    //        print(index / (float)characters.Length);
-    //        Vector3 offset = (sourceVertices[vertexIndex + 0] + sourceVertices[vertexIndex + 2]) / 2;
-    //        destinationVertices[vertexIndex + 0] = ((sourceVertices[vertexIndex + 0] - offset) * charSize) + offset;
-    //        destinationVertices[vertexIndex + 1] = ((sourceVertices[vertexIndex + 1] - offset) * charSize) + offset;
-    //        destinationVertices[vertexIndex + 2] = ((sourceVertices[vertexIndex + 2] - offset) * charSize) + offset;
-    //        destinationVertices[vertexIndex + 3] = ((sourceVertices[vertexIndex + 3] - offset) * charSize) + offset;
-
-    //        index++;
-    //    }
-
-
-    //    for (int i = 0; i < info.meshInfo.Length; i++)
-    //    {
-    //        TMP_MeshInfo theInfo = info.meshInfo[i];
-    //        theInfo.mesh.vertices = theInfo.vertices;
-    //        currentTextbox.UpdateGeometry(theInfo.mesh, i);
-    //    }
-
-    //}
-
-    //private void RestEffects(TMP_Text currentTextbox)
-    //{
-    //    wait = 0.15f;
-    //    currentTextbox.fontSize = fontSize;
+    public void SetBool(bool value)
+    {
+        WaitFor = value;
+    }
 
     public IEnumerator incrementText(string text, TMP_Text currentTextbox)
     {

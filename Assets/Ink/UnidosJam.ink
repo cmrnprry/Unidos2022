@@ -31,7 +31,7 @@ Pues, now we add the <color=red>rice</color> to the <color=green>pan</color>. #s
 
 //– do the action –
 
-¡Guau, una cocinera! #speaker: Abuelita
+¡Guau, que cocinera! #speaker: Abuelita
 Ok, I’ll stir the rice while you add <color=red>garlic</color> and <color=red>onion</color> to the <color=blue>pot</color> #speaker: Abuelita #WaitUntil 
 
 //– do the action –

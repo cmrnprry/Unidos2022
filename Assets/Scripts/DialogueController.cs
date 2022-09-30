@@ -29,7 +29,7 @@ public class DialogueController : MonoBehaviour
 
     [Header("TextBoxes")]
     public TextMeshProUGUI textbox;
-
+    public Animator anim;
 
     [Header("Dialogue")]
     private bool isTyping;
@@ -39,9 +39,8 @@ public class DialogueController : MonoBehaviour
     private string side = "";
 
     [Header("Scenes")]
-    public GameObject junk;
-    public GameObject living;
-    public GameObject kitchen;
+    public GameObject[] rooms;
+    private int index = 1;  //start in kitchen
 
     //make this a singleton
 
@@ -63,10 +62,17 @@ public class DialogueController : MonoBehaviour
 
         if (exclaimation.activeSelf)
         {
-            //transition logic
-            //hide
+            FadeToBlack(true);
+            yield return new WaitForSeconds(1f);
+
+            Tranition();
             exclaimation.SetActive(false);
-            //show
+            textbox.text = "";
+            yield return new WaitForEndOfFrame();
+            FadeToBlack(false);
+
+            yield return new WaitForSeconds(1f);
+            anim.gameObject.SetActive(false);
         }
 
         if (story.canContinue)
@@ -90,6 +96,33 @@ public class DialogueController : MonoBehaviour
 
     }
 
+    void Tranition()
+    {
+        int temp = index;
+        switch (side)
+        {
+            case "left":
+                index -= 1;
+                break;
+            case "right":
+                index += 1;
+                break;
+            default:
+                Debug.LogWarning("Transition unclear");
+                break;
+        }
+
+        rooms[temp].SetActive(false);
+        rooms[index].SetActive(true);
+    }
+
+    void FadeToBlack(bool isFadeOut)
+    {
+        anim.gameObject.SetActive(true);
+        string animation = (isFadeOut) ? "FadeOut" : "FadeIn";
+        anim.SetTrigger(animation);
+    }
+
     private void CheckTags()
     {
         foreach (string tag in currentTags)
@@ -104,8 +137,9 @@ public class DialogueController : MonoBehaviour
                     break;
 
                 case "prompt":
-                    side = split[1];
+                    side = split[1].Trim();
                     //set the side
+                    exclaimation.GetComponent<RectTransform>().anchoredPosition = (side == "left") ? new Vector3(-758, 235, 0) : new Vector3(784, 235, 0);
                     exclaimation.SetActive(true);
                     WaitFor = true;
                     break;

@@ -20,7 +20,7 @@ public class Zipper : MonoBehaviour
     public float StateTwo;
     public float StateThree;
 
-    private bool zipped = false;
+    public static bool zipped = false;
     private Sequence seqMovvement = null;
     private Sequence seqRotation = null;
 
@@ -40,6 +40,7 @@ public class Zipper : MonoBehaviour
         if (Current == CLOSED.y && zipper.position.y >= CLOSED.y - 10f)
         {
             zipped = true;
+            //DialogueController.instance.SetBool(false);
         }
         else
         {

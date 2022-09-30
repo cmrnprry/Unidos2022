@@ -42,10 +42,19 @@ public class DialogueController : MonoBehaviour
     public GameObject[] rooms;
     private int index = 1;  //start in kitchen
 
-    //make this a singleton
+    public static DialogueController instance;
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
         DontDestroyOnLoad(this);
     }
 

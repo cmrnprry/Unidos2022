@@ -77,6 +77,7 @@ public class DialogueController : MonoBehaviour
             Tranition();
             exclaimation.SetActive(false);
             textbox.text = "";
+            AudioController.instance.SetAudio(index);
             yield return new WaitForEndOfFrame();
             FadeToBlack(false);
 
@@ -123,6 +124,8 @@ public class DialogueController : MonoBehaviour
 
         rooms[temp].SetActive(false);
         rooms[index].SetActive(true);
+
+       
     }
 
     void FadeToBlack(bool isFadeOut)

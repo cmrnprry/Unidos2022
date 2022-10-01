@@ -8,16 +8,16 @@ Next, we need the <color=red>vegetable oil</color> for the rice in the <color=gr
 
 //– do the action –
 
-Oye! We need some help over here! #speaker: Cousin1
-Go ahead. I’ll be here. #speaker: Abuelita #promt: left
+Oye! We need some help over here! #speaker: Cousin1 
+Go ahead. I’ll be here. #speaker: Abuelita #prompt: left
 
 Where do you think we should put the streamers? #speaker: Cousin2
 Aquí? Near the T.V.? #speaker: Cousin1
 O aquí en la mesa? #speaker: Cousin2
 
 * [choicea: near the T.V.]
-    Cousin1: HA! Knew it. #speaker: Cousin1
-    Cousin2: Cállate. #speaker: Cousin2
+    HA! Knew it. #speaker: Cousin1
+    Cállate. #speaker: Cousin2
 * [choiceb: on the table]
-    Cousin2: I knew you had good taste, prima. #speaker: Cousin2
+    I knew you had good taste, prima. #speaker: Cousin2
 - -> END

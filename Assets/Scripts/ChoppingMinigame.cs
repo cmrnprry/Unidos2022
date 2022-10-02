@@ -13,6 +13,8 @@ public class ChoppingMinigame : MonoBehaviour
     public int chopsLeft;
     public int maxChops;
 
+    public Dictionary<Food, int> chopsLeftPerFood;
+
     void Start()
     {
         maxChops = 10;

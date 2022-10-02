@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public enum Food
 {
@@ -35,8 +36,11 @@ public class KitchenManager : Singleton<KitchenManager>
     public GameObject hideSpot;
 
     public List<RecipeStepScriptableObject> recipeSteps;
-    public RecipeStepScriptableObject currentStep;
+
+    public List<RecipeStepScriptableObject> currentSteps;
+
     public bool waitingForNextStep;
+    
     public bool recipesFinished;
     public KitchenTool? lastToolHovered;
     public RecipeItem? currentItem;
@@ -52,15 +56,18 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         waitingForNextStep = true;
         recipesFinished = false;
-        NextStep();
+       
+        //NextStep(2);
     }
 
     void Update()
     {
         if(waitingForNextStep)
         {
-            waitingForNextStep = false;
-            NextStep();
+            //update dialogue manager we are done
+            
+            //waitingForNextStep = false;
+            //NextStep(3);
         }
     }
     //wait for step to finish -- 
@@ -79,7 +86,8 @@ public class KitchenManager : Singleton<KitchenManager>
 
             if (rec1.Overlaps(rec2))
             {
-                if (currentStep.startedFood == food && currentStep.neededSpot == lastToolHovered?.point)
+                var tmp = currentSteps.Where(p => p.startedFood == food && p.neededSpot == lastToolHovered?.point);
+                if (tmp.Any())
                 {
                     if(lastToolHovered.isChopper)
                     {
@@ -87,15 +95,25 @@ public class KitchenManager : Singleton<KitchenManager>
                         currentItem.isChopping = true;
                         choppingItem = currentItem;
                     }
-                    if(currentStep.shouldHide)
+                    if(tmp.First().shouldHide)
                     {
                         //hide item?
                         currentItem.HideFood();
                     }
-                    waitingForNextStep = true;
+                    currentSteps.Remove(tmp.First());
                     //update tool to be next image?
+                    
                 }
             }
+            if (currentSteps.Count > 0 && currentSteps[0].isChoppingGame)
+            {
+                mg.StartMinigame();
+            }
+            else if (currentSteps.Count == 0)
+            {
+                waitingForNextStep = true;
+            }
+            
         }
         
         ResetToolHovered();
@@ -122,26 +140,30 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         currentItem = null;
     }
-    void NextStep()
+    void NextStep(int steps)
     {
-        
         waitingForNextStep = false;
         if(recipeSteps.Count > 0)
         {
-            currentStep = recipeSteps[0];
-            recipeSteps.RemoveAt(0);
-            textbox.text = string.Format(debugTxt, currentStep.startedFood, currentStep.neededSpot);
-            if(currentStep.isChoppingGame)
+            currentSteps = recipeSteps.GetRange(0, steps);
+            recipeSteps.RemoveRange(0, steps);
+
+            /*
+            textbox.text = "";
+            
+            var tmpString = "";
+            foreach (var step in currentSteps)
             {
-                //set active chopping minigame?
-                textbox.text = "time to chop";
-                mg.StartMinigame();
+                //okay adding to it
+                tmpString += string.Format(debugTxt, step.startedFood, step.neededSpot);
             }
+            textbox.text = tmpString;
+            */
         }
         else
         {
             recipesFinished = true;
-            textbox.text = "Done!";
+            //textbox.text = "Done!";
         }
         
     }
@@ -150,6 +172,7 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         choppingItem.OnChopped();
         choppingItem = null;
-        waitingForNextStep = true;
+        currentSteps.RemoveAt(0);
     }
+
 }

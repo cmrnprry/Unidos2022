@@ -20,6 +20,7 @@ public enum Food
     Salt,
     Water,
     Bouillon,
+    BouillonWater,
     Cumin,
     GarlicPepper,
     None
@@ -28,7 +29,7 @@ public enum KitchenPoint
 {
     FryingPan,
     SaucePan,
-    Sink,
+    Water,
     CuttingBoard
 }
 public class KitchenManager : Singleton<KitchenManager>
@@ -47,6 +48,12 @@ public class KitchenManager : Singleton<KitchenManager>
 
     public RecipeItem? choppingItem;
 
+    //need this since one of the recipes is water and we need to transform one and then the other is gonna become a 
+    //regular recipe item
+    public List<GameObject> waterSource;
+    public bool waterFlag = false;
+    
+
     private string debugTxt = "food - {0} spot - {1}"; 
     public TextMeshProUGUI textbox;
 
@@ -57,7 +64,6 @@ public class KitchenManager : Singleton<KitchenManager>
         waitingForNextStep = true;
         recipesFinished = false;
        
-        //NextStep(2);
     }
 
     void Update()
@@ -65,7 +71,8 @@ public class KitchenManager : Singleton<KitchenManager>
         if(waitingForNextStep)
         {
             //update dialogue manager we are done
-            
+            //DialogueController.instance.WaitFor = false;
+            waitingForNextStep = false;
             //waitingForNextStep = false;
             //NextStep(3);
         }
@@ -95,14 +102,22 @@ public class KitchenManager : Singleton<KitchenManager>
                         currentItem.isChopping = true;
                         choppingItem = currentItem;
                     }
-                    if(tmp.First().shouldHide)
+                    
+                    if (tmp.First().shouldHide)
                     {
                         //hide item?
                         currentItem.HideFood();
                     }
+                    
                     currentSteps.Remove(tmp.First());
                     //update tool to be next image?
-                    
+
+                    //Okay since we step out of the function we have to do this last i believe
+                    if (lastToolHovered.point == KitchenPoint.Water)
+                    {
+                        //okay we need to handle the water step
+                        WaterStep(lastToolHovered);
+                    }
                 }
             }
             if (currentSteps.Count > 0 && currentSteps[0].isChoppingGame)
@@ -115,8 +130,11 @@ public class KitchenManager : Singleton<KitchenManager>
             }
             
         }
+        if (!waterFlag)
+        {
+            ResetToolHovered();
+        }
         
-        ResetToolHovered();
     }
     public void ResetToolHovered()
     {
@@ -140,7 +158,7 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         currentItem = null;
     }
-    void NextStep(int steps)
+    public void NextStep(int steps)
     {
         waitingForNextStep = false;
         if(recipeSteps.Count > 0)
@@ -173,6 +191,24 @@ public class KitchenManager : Singleton<KitchenManager>
         choppingItem.OnChopped();
         choppingItem = null;
         currentSteps.RemoveAt(0);
+    }
+
+    public void WaterStep(KitchenTool kt)
+    {
+        waterFlag = true;
+        //Okay on water step we do two things.
+        waterSource.Remove(kt.gameObject);
+        kt.ifWater.enabled = true;
+        kt.ifWater.TransformFood();
+        kt.gameObject.transform.SetParent(kt.ifWater.OrigParent.transform);
+        
+        var tmpWater = waterSource[0].GetComponent<KitchenTool>();
+        tmpWater.ifWater.enabled = true;
+        tmpWater.gameObject.transform.SetParent(tmpWater.ifWater.OrigParent.transform);
+
+        kt.enabled = false;
+        tmpWater.enabled = false;
+        lastToolHovered = null;
     }
 
 }

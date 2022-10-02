@@ -24,11 +24,10 @@ public class RecipeItem : DraggableImage
 
     public void OnChopped()
     {
-        current = transformed;
+        
         isChopping = false;
+        TransformFood();
 
-        //set image to new image
-        curImage.sprite = transformedSprite;
         //tbox.text = transformed.ToString();
         transform.SetParent(OrigParent.transform);
         var tmpPos = transform.position;
@@ -72,6 +71,12 @@ public class RecipeItem : DraggableImage
        
         lastPosition = KitchenManager.Instance.hideSpot.transform.position;
         transform.position = lastPosition;
+    }
+
+    public void TransformFood()
+    {
+        current = transformed;
+        curImage.sprite = transformedSprite;
     }
 
 

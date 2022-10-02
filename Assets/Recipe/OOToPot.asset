@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0c66b4d3507ecb4d84678557a72d9f9, type: 3}
-  m_Name: Step6
+  m_Name: OOToPot
   m_EditorClassIdentifier: 
-  startedFood: 3
-  neededSpot: 0
-  isChoppingGame: 0
-  shouldHide: 1
+  startedFood: 6
+  neededSpot: 1
+  isDone: 0

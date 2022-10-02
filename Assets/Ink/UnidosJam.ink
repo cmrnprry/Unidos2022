@@ -79,7 +79,7 @@ You’re a lifesaver! #speaker: aunt
 //– exclamation prompt –
 
 It almost burned, but good thing you have grandma to watch out. #speaker: Abuelita
-Add <color=red>water</color> and <color=red>chicken seasoning</color> and make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil 
+Add <color=red>water</color> and <color=red>chicken seasoning</color> to make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil 
  
 //– do the action –
 
@@ -133,7 +133,7 @@ Or hanging in the entrance? #speaker: Cousin1
     Good choice. #speaker: Cousin2
 
 * [In the entrance]
-    Aw, I think that’ll look great. #speaker: Cousin1
+    That’ll look great! #speaker: Cousin1
 
 - Food is ready! #speaker: Abuelita
 

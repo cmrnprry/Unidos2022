@@ -22,25 +22,41 @@ public class DialogueController : MonoBehaviour
     [Header("Ink")]
     public TextAsset ink;
     public float wait = 0.15f;
-    private float fontSize = 36;
     private Story story;
     private List<string> currentTags = new List<string>();
 
     private Coroutine coroutine;
 
     [Header("TextBoxes")]
-    public TextMeshProUGUI friendTextBox;
-    public GameObject friend;
-    public TextMeshProUGUI otherTextBox;
-    public GameObject other;
-    public TextMeshProUGUI commentsTextBox;
-    public GameObject comments;
+    public TextMeshProUGUI textbox;
+    public Animator anim;
 
     [Header("Dialogue")]
     private bool isTyping;
-    private string effect;
-    private float value;
-    private Vector3 original;
+    public bool WaitFor;
+    public Sprite[] heads;
+    public GameObject exclaimation;
+    private string side = "";
+
+    [Header("Scenes")]
+    public GameObject[] rooms;
+    private int index = 1;  //start in kitchen
+
+    public static DialogueController instance;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        DontDestroyOnLoad(this);
+    }
 
     private void Start()
     {
@@ -48,12 +64,29 @@ public class DialogueController : MonoBehaviour
         coroutine = StartCoroutine(ShowNextLine());
     }
 
-
     private IEnumerator ShowNextLine()
     {
+        if (WaitFor)
+            yield return new WaitUntil(() => !WaitFor);
+
+        if (exclaimation.activeSelf)
+        {
+            FadeToBlack(true);
+            yield return new WaitForSeconds(1f);
+
+            Tranition();
+            exclaimation.SetActive(false);
+            textbox.text = "";
+            AudioController.instance.SetAudio(index);
+            yield return new WaitForEndOfFrame();
+            FadeToBlack(false);
+
+            yield return new WaitForSeconds(1f);
+            anim.gameObject.SetActive(false);
+        }
+
         if (story.canContinue)
         {
-            RestEffects(friendTextBox);
             string nextLine = story.Continue().Trim();
             currentTags = story.currentTags;
 
@@ -62,8 +95,7 @@ public class DialogueController : MonoBehaviour
                 CheckTags();
             }
 
-
-            coroutine = StartCoroutine(incrementText(nextLine, friendTextBox));
+            coroutine = StartCoroutine(incrementText(nextLine, textbox));
         }
         else
         {
@@ -74,102 +106,70 @@ public class DialogueController : MonoBehaviour
 
     }
 
+    void Tranition()
+    {
+        int temp = index;
+        switch (side)
+        {
+            case "left":
+                index -= 1;
+                break;
+            case "right":
+                index += 1;
+                break;
+            default:
+                Debug.LogWarning("Transition unclear");
+                break;
+        }
+
+        rooms[temp].SetActive(false);
+        rooms[index].SetActive(true);
+
+       
+    }
+
+    void FadeToBlack(bool isFadeOut)
+    {
+        anim.gameObject.SetActive(true);
+        string animation = (isFadeOut) ? "FadeOut" : "FadeIn";
+        anim.SetTrigger(animation);
+    }
+
     private void CheckTags()
     {
         foreach (string tag in currentTags)
         {
-            string[] split = tag.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            string effect = split[0];
-            float v = (split.Length > 1) ? float.Parse(split[1]) : -1;
-            switch (effect)
+            tag.ToLower().Replace(" ", "");
+            string[] split = tag.Split(':', StringSplitOptions.RemoveEmptyEntries);
+            string TAG = split[0];
+            switch (TAG)
             {
-                case "speed":
-                    ChangeTextSpeed(v);
+                case "speaker":
+                    string character = split[1];
                     break;
 
-                case "size":
-                    ChangeTextSize(v, friendTextBox);
+                case "prompt":
+                    side = split[1].Trim();
+                    //set the side
+                    exclaimation.GetComponent<RectTransform>().anchoredPosition = (side == "left") ? new Vector3(-758, 235, 0) : new Vector3(784, 235, 0);
+                    exclaimation.SetActive(true);
+                    WaitFor = true;
                     break;
 
-                case "increasing size":
-                    this.effect = "size";
-                    value = v;
+                case "WaitUntil":
+                    WaitFor = true;
                     break;
 
                 default:
-                    Debug.LogError($"Text Effect Not Found: {effect}");
+                    Debug.LogError($"Tag not found: {TAG}");
                     break;
             }
-
-
         }
     }
 
-    private void ChangeTextSpeed(float value)
+    public void SetBool(bool value)
     {
-        if (value < 0)
-        {
-            wait = 0.15f;
-        }
-        else
-        {
-            wait = value;
-        }
-    }
-
-    private void ChangeTextSize(float value, TMP_Text currentTextbox)
-    {
-        fontSize = currentTextbox.fontSize;
-        currentTextbox.fontSize *= value;
-    }
-
-    private void IncreasingTextSize(float end, TMP_Text currentTextbox, string text, TMP_TextInfo info)
-    {
-        float start = currentTextbox.fontSize;
-        float difference = Mathf.Abs(end - start);
-
-        char[] characters = text.ToCharArray();
-        int index = 0;
-
-        TMP_MeshInfo[] cachedMeshInfo = info.CopyMeshInfoVertexData();
-        foreach (char c in characters)
-        {
-            if (Char.IsWhiteSpace(c))
-            {
-                continue;
-            }
-
-            int materialIndex = info.characterInfo[index].materialReferenceIndex;
-            Vector3[] destinationVertices = info.meshInfo[materialIndex].vertices;
-            Vector3[] sourceVertices = cachedMeshInfo[materialIndex].vertices;
-            int vertexIndex = info.characterInfo[index].vertexIndex;
-
-
-            float charSize =  Mathf.Max(0.375f, index / (float)characters.Length);
-            print(index / (float)characters.Length);
-            Vector3 offset = (sourceVertices[vertexIndex + 0] + sourceVertices[vertexIndex + 2]) / 2;
-            destinationVertices[vertexIndex + 0] = ((sourceVertices[vertexIndex + 0] - offset) * charSize) + offset;
-            destinationVertices[vertexIndex + 1] = ((sourceVertices[vertexIndex + 1] - offset) * charSize) + offset;
-            destinationVertices[vertexIndex + 2] = ((sourceVertices[vertexIndex + 2] - offset) * charSize) + offset;
-            destinationVertices[vertexIndex + 3] = ((sourceVertices[vertexIndex + 3] - offset) * charSize) + offset;
-
-            index++;
-        }
-
-
-        for (int i = 0; i < info.meshInfo.Length; i++)
-        {
-            TMP_MeshInfo theInfo = info.meshInfo[i];
-            theInfo.mesh.vertices = theInfo.vertices;
-            currentTextbox.UpdateGeometry(theInfo.mesh, i);
-        }
-
-    }
-
-    private void RestEffects(TMP_Text currentTextbox)
-    {
-        wait = 0.15f;
-        currentTextbox.fontSize = fontSize;
+        WaitFor = value;
     }
 
     public IEnumerator incrementText(string text, TMP_Text currentTextbox)
@@ -185,18 +185,6 @@ public class DialogueController : MonoBehaviour
         currentTextbox.ForceMeshUpdate();
         TMP_TextInfo textInfo = currentTextbox.textInfo;
         int totalCharacters = currentTextbox.textInfo.characterCount;
-
-        //CHECK FOR EFFECTS
-        switch (effect)
-        {
-            case "size":
-                IncreasingTextSize(value, currentTextbox, text, textInfo);
-                break;
-
-            default:
-                break;
-        }
-
 
         for (int i = 0; i < totalCharacters; i++)
         {

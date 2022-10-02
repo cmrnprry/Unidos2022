@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Junk Room Scene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Main Menu.unity
+    guid: e0b23c29db152804fbdc1cdc4bfa60ee
+  - enabled: 1
+    path: Assets/Scenes/Combined.unity
+    guid: c2710c5e82b027444b0142db8f3a238f
   m_configObjects: {}

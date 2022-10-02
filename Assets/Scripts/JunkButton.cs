@@ -16,11 +16,11 @@ public class JunkButton : MonoBehaviour
 
     private void Update()
     {
-        //if (Zipper.zipped)
-        //{
-        //    buttons.SetActive(true);
-        //    zipper.SetActive(false);
-        //}
+        if (Zipper.zipped)
+        {
+            buttons.SetActive(true);
+            zipper.SetActive(false);
+        }
 
         if (CanDrag && !done)
         {
@@ -38,7 +38,7 @@ public class JunkButton : MonoBehaviour
     {
         if (CanDrag)
         {
-            //DialogueController.instance.SetBool(false);
+            DialogueController.instance.SetBool(false);
             done = true;
             UnClickButton();
         }

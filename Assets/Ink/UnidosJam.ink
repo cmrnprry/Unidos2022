@@ -135,7 +135,7 @@ Noooooo, abuelita! ¡No como carne! #speaker: Cousin1
 Ay, sí sí lo siento. Ok, no meat. #speaker: Abuelita
 
 Now, I think we’re done. All that’s left to do is wait. #speaker: Abuelita
-Go ahead and check on your cousins. #speaker: Abuelita #prompt left 
+Go ahead and check on your cousins. #speaker: Abuelita #prompt: left 
 
 //– exclamation point –
 

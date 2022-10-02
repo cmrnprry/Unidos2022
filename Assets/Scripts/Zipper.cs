@@ -40,7 +40,7 @@ public class Zipper : MonoBehaviour
         if (Current == CLOSED.y && zipper.position.y >= CLOSED.y - 10f)
         {
             zipped = true;
-            //DialogueController.instance.SetBool(false);
+            DialogueController.instance.SetBool(false);
         }
         else
         {

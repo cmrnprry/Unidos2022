@@ -8,5 +8,5 @@ public class RecipeStepScriptableObject : ScriptableObject
     public Food startedFood;
     public KitchenPoint neededSpot;
     public bool isChoppingGame;
-    public bool shouldMove;
+    public bool shouldHide;
 }

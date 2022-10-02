@@ -17,15 +17,19 @@ public class RecipeItem : DraggableImage
     
 
     public Image curImage;
+    public Sprite transformedSprite;
+    
+    //removing on release
     public TextMeshProUGUI tbox;
+
     public void OnChopped()
     {
         current = transformed;
         isChopping = false;
 
         //set image to new image
-        curImage.color = Color.green;
-        tbox.text = transformed.ToString();
+        curImage.sprite = transformedSprite;
+        //tbox.text = transformed.ToString();
         transform.SetParent(OrigParent.transform);
         var tmpPos = transform.position;
         var tmpVec = new Vector3(0, -100);
@@ -64,6 +68,8 @@ public class RecipeItem : DraggableImage
 
     public void HideFood()
     {
+        //okay i guess we could also do something like play a dotween animation for the pot or something?
+       
         lastPosition = KitchenManager.Instance.hideSpot.transform.position;
         transform.position = lastPosition;
     }

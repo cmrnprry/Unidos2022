@@ -87,7 +87,7 @@ public class KitchenManager : Singleton<KitchenManager>
                         currentItem.isChopping = true;
                         choppingItem = currentItem;
                     }
-                    if(currentStep.shouldMove)
+                    if(currentStep.shouldHide)
                     {
                         //hide item?
                         currentItem.HideFood();
@@ -135,7 +135,7 @@ public class KitchenManager : Singleton<KitchenManager>
             {
                 //set active chopping minigame?
                 textbox.text = "time to chop";
-                mg.startMinigame = true;
+                mg.StartMinigame();
             }
         }
         else

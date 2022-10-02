@@ -11,6 +11,12 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public RectTransform rectTransform;
 
     public bool isChopper;
+    
+    //okay if we do this then we are hard coding in how we handle dotweens
+    //public GameObject sandwichSpot;
+    //public GameObject baseLocation;
+
+    
     public void Start()
     {
         rectTransform = GetComponent<RectTransform>();

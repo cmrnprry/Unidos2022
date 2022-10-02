@@ -11,11 +11,11 @@ public class ChoppingMinigame : MonoBehaviour
     public UIParticle particles;
 
     public int chopsLeft;
-    
+    public int maxChops;
 
     void Start()
     {
-        
+        maxChops = 10;
     }
 
     void Update()
@@ -34,9 +34,16 @@ public class ChoppingMinigame : MonoBehaviour
             {
                 minigameDone = true;
                 KitchenManager.Instance.ChopDone();
+                chopsLeft = maxChops;
             }
         }
        
+    }
+
+    public void StartMinigame()
+    {
+        minigameDone = false;
+        startMinigame = true;
     }
 
     

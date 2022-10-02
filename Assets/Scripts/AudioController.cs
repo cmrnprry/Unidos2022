@@ -10,6 +10,12 @@ public class AudioController : MonoBehaviour
 
     public static AudioController instance;
 
+    private void Awake()
+    {
+        instance = this;
+        DontDestroyOnLoad(this);
+    }
+
     public void SetAudio(int index)
     {
         source.DOFade(0, 0.5f);

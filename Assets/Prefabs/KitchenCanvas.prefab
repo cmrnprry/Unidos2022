@@ -539,7 +539,28 @@ MonoBehaviour:
   hideSpot: {fileID: 2603678893993559973}
   recipeSteps:
   - {fileID: 11400000, guid: 1ab6ab1bcd8c5a94d908aa04c82ff4a7, type: 2}
-  currentSteps: []
+  currentSteps:
+  - {fileID: 11400000, guid: 68056379e47777c43b87410359aebe48, type: 2}
+  - {fileID: 11400000, guid: 355e398690a66f0468d9ca3f817e8e24, type: 2}
+  - {fileID: 11400000, guid: 534d9bca81d1c8347ab82365bec360c0, type: 2}
+  - {fileID: 11400000, guid: e5514f53a2798e2469ed35fcc8922682, type: 2}
+  - {fileID: 11400000, guid: 7523009828db5d748bb90db1a00a0109, type: 2}
+  - {fileID: 11400000, guid: c564b610685e33f4bbab0e24df571b7a, type: 2}
+  - {fileID: 11400000, guid: d6b5df6ca0b9a5046898f48ff36d29a2, type: 2}
+  - {fileID: 11400000, guid: 3281091e88dba544ebceb63b60fb17f7, type: 2}
+  - {fileID: 11400000, guid: 6a1c3d79dd6fd2644b870bdd16b1f7ae, type: 2}
+  - {fileID: 11400000, guid: af93084704985a0438f0871521ff2851, type: 2}
+  - {fileID: 11400000, guid: 0836643f3bab4754290b291eceadf5b7, type: 2}
+  - {fileID: 11400000, guid: 9518d344c4f0fa44883f170b91cce7c2, type: 2}
+  - {fileID: 11400000, guid: b4d770f31bd8ea447b8800a2c4a47597, type: 2}
+  - {fileID: 11400000, guid: 1ab6ab1bcd8c5a94d908aa04c82ff4a7, type: 2}
+  - {fileID: 11400000, guid: c05b7ba95a2e1004ebeb3d3befe63e96, type: 2}
+  - {fileID: 11400000, guid: e5514f53a2798e2469ed35fcc8922682, type: 2}
+  - {fileID: 11400000, guid: 7523009828db5d748bb90db1a00a0109, type: 2}
+  - {fileID: 11400000, guid: 83b395c1a45d4044aa4f22c36e7257d7, type: 2}
+  - {fileID: 11400000, guid: 7651bc997a254f543ac0307e7ed15842, type: 2}
+  - {fileID: 11400000, guid: 217533ada0b6d0241bdb7e3deb1023b7, type: 2}
+  - {fileID: 11400000, guid: 81ad2002cc76ed1428c3d54b9b5b7084, type: 2}
   waitingForNextStep: 0
   recipesFinished: 0
   lastToolHovered: {fileID: 0}

@@ -33,15 +33,15 @@ O aquí en la mesa? #speaker: Cousin2
 //– exclamation point prompt –
 
 Let’s keep cooking so we finish on time. #speaker: Abuelita
-Pues, now we add the <color=red>rice</color> to the <color=green>pan</color>. #speaker: Abuelita #WaitUntil 
+Pues, now we add the <color=red>rice</color> to the <color=green>pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 1
 
 //– do the action –
 
 ¡Guau, que cocinera! #speaker: Abuelita
-Ok, I’ll stir the rice. Can you chop the <color=red>garlic</color> and add it to the <color=blue>pot</color>? #speaker: Abuelita #WaitUntil 
+Ok, I’ll stir the rice. Can you chop the <color=red>garlic</color> and add it to the <color=blue>pot</color>? #speaker: Abuelita #WaitUntil #Recipe: 3
 // -do the action -
 
-Now, chop the <color=red>onion</color> to add to the <color=blue>pot</color>, por favor. #speaker: Abuelita #WaitUntil 
+Now, chop the <color=red>onion</color> to add to the <color=blue>pot</color>, por favor. #speaker: Abuelita #WaitUntil #Recipe: 3
 
 //– do the action –
 
@@ -66,7 +66,7 @@ You can go back to helping grandma now. #speaker: aunt #prompt: left
 //exclamation prompt –
 
 You’re back, finally! Pues… #speaker: Abuelita
-Add the <color=red>beans</color>, <color=red>cilantro</color>, <color=red>cumin</color> and <color=red>salt</color> to the <color=blue>pot</color>. #speaker: Abuelita #WaitUntil 
+Add the <color=red>beans</color>, <color=red>cilantro</color>, <color=red>cumin</color> and <color=red>salt</color> to the <color=blue>pot</color>. #speaker: Abuelita #WaitUntil #Recipe: 4
 
 //– do the action –
 
@@ -88,7 +88,7 @@ You’re a lifesaver! #speaker: aunt
 //– exclamation prompt –
 
 It almost burned, but good thing you have grandma to watch out. #speaker: Abuelita
-Add <color=red>water</color> and <color=red>chicken seasoning</color> to make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil 
+Add <color=red>water</color> and <color=red>chicken seasoning</color> to make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil #Recipe: 2
  
 //– do the action –
 
@@ -122,11 +122,11 @@ Hurry back! #speaker: Cousin2 #prompt: right
 //– exclamation point –
 
 Stay here with me! #speaker: Abuelita
-Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUntil
+Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUntil #Recipe: 2
 
 //– do the action – 
 
-Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>water</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil 
+Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>water</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 5
 
 //– do the action – 
 

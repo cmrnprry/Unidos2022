@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0c66b4d3507ecb4d84678557a72d9f9, type: 3}
-  m_Name: CuminPot
+  m_Name: WaterToPan
   m_EditorClassIdentifier: 
-  startedFood: 14
-  neededSpot: 1
+  startedFood: 11
+  neededSpot: 0
   isChoppingGame: 0
   shouldHide: 0

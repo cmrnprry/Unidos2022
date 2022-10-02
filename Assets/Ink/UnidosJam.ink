@@ -114,7 +114,8 @@ Hurry back! #speaker: Cousin2 #prompt: right
 //– exclamation point –
 
 Stay here with me! #speaker: Abuelita
-<color=red>Garlic</color>, <color=red>tomato sauce</color>, <color=red>water</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil 
+Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUntil
+Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>water</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil 
 
 //– do the action – 
 

@@ -99,7 +99,7 @@ public class DialogueController : MonoBehaviour
             Tranition();
             exclaimation.SetActive(false);
             textbox.text = "";
-            //AudioController.instance.SetAudio(index);
+            AudioController.instance.SetAudio(index);
             yield return new WaitForEndOfFrame();
             FadeToBlack(false);
 

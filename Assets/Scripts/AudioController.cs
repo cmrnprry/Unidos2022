@@ -18,8 +18,10 @@ public class AudioController : MonoBehaviour
 
     public void SetAudio(int index)
     {
-        source.DOFade(0, 0.5f);
+        //make this transisition smoother
+        source.DOFade(0, 1.5f);
         source.clip = clips[index];
-        source.DOFade(1, 0.5f);
+        source.DOFade(1, 1.5f);
+        source.Play();
     }
 }

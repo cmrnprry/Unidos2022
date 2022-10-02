@@ -150,7 +150,7 @@ Or hanging in the entrance? #speaker: Cousin1
 
 * [In the entrance]
     ~signChoice =  true
-    Aw, I think that’ll look great. #speaker: Cousin1
+    Told ya so! #speaker: Cousin1
 
 - Food is ready! #speaker: Abuelita
 

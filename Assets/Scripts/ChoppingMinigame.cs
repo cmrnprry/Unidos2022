@@ -36,7 +36,6 @@ public class ChoppingMinigame : MonoBehaviour
             {
                 minigameDone = true;
                 KitchenManager.Instance.ChopDone();
-                chopsLeft = maxChops;
             }
         }
        
@@ -46,6 +45,7 @@ public class ChoppingMinigame : MonoBehaviour
     {
         minigameDone = false;
         startMinigame = true;
+        chopsLeft = maxChops;
     }
 
     

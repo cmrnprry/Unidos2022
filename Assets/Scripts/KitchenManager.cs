@@ -61,7 +61,7 @@ public class KitchenManager : Singleton<KitchenManager>
     //not terribly happy about how this works but idk it works i guess
     void Start()
     {
-        waitingForNextStep = true;
+        //waitingForNextStep = true;
         recipesFinished = false;
        
     }
@@ -71,10 +71,15 @@ public class KitchenManager : Singleton<KitchenManager>
         if(waitingForNextStep)
         {
             //update dialogue manager we are done
-            //DialogueController.instance.WaitFor = false;
+           
             waitingForNextStep = false;
+            DialogueController.instance.WaitFor = false;
             //waitingForNextStep = false;
             //NextStep(3);
+        }
+        if(recipesFinished)
+        {
+            DialogueController.instance.WaitFor = false;
         }
     }
     //wait for step to finish -- 
@@ -85,6 +90,7 @@ public class KitchenManager : Singleton<KitchenManager>
         {
             //hate this but gotta love that it works
             Vector3[] corners = new Vector3[4];
+            Debug.Log(currentItem?.name);
             currentItem.rectTransform.GetWorldCorners(corners);
             Rect rec1 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
 
@@ -134,7 +140,11 @@ public class KitchenManager : Singleton<KitchenManager>
         {
             ResetToolHovered();
         }
-        
+        if (waterFlag)
+        {
+            lastToolHovered = null;
+            waterFlag = false;
+        }
     }
     public void ResetToolHovered()
     {
@@ -166,17 +176,6 @@ public class KitchenManager : Singleton<KitchenManager>
             currentSteps = recipeSteps.GetRange(0, steps);
             recipeSteps.RemoveRange(0, steps);
 
-            /*
-            textbox.text = "";
-            
-            var tmpString = "";
-            foreach (var step in currentSteps)
-            {
-                //okay adding to it
-                tmpString += string.Format(debugTxt, step.startedFood, step.neededSpot);
-            }
-            textbox.text = tmpString;
-            */
         }
         else
         {
@@ -191,6 +190,10 @@ public class KitchenManager : Singleton<KitchenManager>
         choppingItem.OnChopped();
         choppingItem = null;
         currentSteps.RemoveAt(0);
+        if(currentSteps.Count==0)
+        {
+            waitingForNextStep = true;
+        }
     }
 
     public void WaterStep(KitchenTool kt)
@@ -208,7 +211,7 @@ public class KitchenManager : Singleton<KitchenManager>
 
         kt.enabled = false;
         tmpWater.enabled = false;
-        lastToolHovered = null;
+        
     }
 
 }

@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  current: 13
-  transformed: 15
+  current: 14
+  transformed: 16
   lastPosition: {x: 0, y: 0, z: 0}
   OrigParent: {fileID: 2603678894984235078}
   choppyBlock: {fileID: 0}
@@ -538,8 +538,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hideSpot: {fileID: 2603678893993559973}
   recipeSteps:
-  - {fileID: 11400000, guid: 1ab6ab1bcd8c5a94d908aa04c82ff4a7, type: 2}
-  currentSteps:
   - {fileID: 11400000, guid: 68056379e47777c43b87410359aebe48, type: 2}
   - {fileID: 11400000, guid: 355e398690a66f0468d9ca3f817e8e24, type: 2}
   - {fileID: 11400000, guid: 534d9bca81d1c8347ab82365bec360c0, type: 2}
@@ -561,6 +559,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7651bc997a254f543ac0307e7ed15842, type: 2}
   - {fileID: 11400000, guid: 217533ada0b6d0241bdb7e3deb1023b7, type: 2}
   - {fileID: 11400000, guid: 81ad2002cc76ed1428c3d54b9b5b7084, type: 2}
+  currentSteps: []
   waitingForNextStep: 0
   recipesFinished: 0
   lastToolHovered: {fileID: 0}
@@ -760,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8666c52be49b42a48aca868700b41997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 2603678893097040946}
   current: 9
   transformed: 15
   lastPosition: {x: 0, y: 0, z: 0}
@@ -1034,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8666c52be49b42a48aca868700b41997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 2603678893302012601}
   current: 0
   transformed: 15
   lastPosition: {x: 0, y: 0, z: 0}
@@ -3319,7 +3318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8666c52be49b42a48aca868700b41997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 8673797766722247084}
   current: 4
   transformed: 5
   lastPosition: {x: 0, y: 0, z: 0}

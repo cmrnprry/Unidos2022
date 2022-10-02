@@ -15,4 +15,4 @@ MonoBehaviour:
   startedFood: 13
   neededSpot: 0
   isChoppingGame: 0
-  shouldHide: 0
+  shouldHide: 1

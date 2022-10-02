@@ -12,6 +12,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
+        AudioController.instance.SetAudio(1);
         SceneManager.LoadScene(1);
     }
 

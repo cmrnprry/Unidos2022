@@ -29,7 +29,7 @@ public class DialogueController : MonoBehaviour
 
     [Header("TextBoxes")]
     public TextMeshProUGUI textbox;
-   // public Animator anim;
+    public Animator anim;
 
     [Header("Dialogue")]
     private bool isTyping;
@@ -43,7 +43,6 @@ public class DialogueController : MonoBehaviour
     private int index = 1;  //start in kitchen
 
     public static DialogueController instance;
-    public LivinngRoomManager livingRoom; 
 
     private void Awake()
     {
@@ -55,30 +54,14 @@ public class DialogueController : MonoBehaviour
         {
             instance = this;
         }
+
         DontDestroyOnLoad(this);
-        livingRoom = FindObjectOfType<LivinngRoomManager>();
     }
 
     private void Start()
     {
         story = new Story(ink.text);
         coroutine = StartCoroutine(ShowNextLine());
-
-        story.ObserveVariable("stramerChoice", (string varName, object newValue) =>
-        {
-            livingRoom.readVars(varName, (bool)newValue);
-        });
-
-        story.ObserveVariable("signChoice", (string varName, object newValue) =>
-        {
-            livingRoom.readVars(varName, (bool)newValue);
-        });
-
-        story.ObserveVariable("baloonChoice", (string varName, object newValue) =>
-        {
-            livingRoom.readVars(varName, (bool)newValue);
-        });
-
     }
 
     private IEnumerator ShowNextLine()
@@ -94,11 +77,12 @@ public class DialogueController : MonoBehaviour
             Tranition();
             exclaimation.SetActive(false);
             textbox.text = "";
+            AudioController.instance.SetAudio(index);
             yield return new WaitForEndOfFrame();
             FadeToBlack(false);
 
             yield return new WaitForSeconds(1f);
-            //anim.gameObject.SetActive(false);
+            anim.gameObject.SetActive(false);
         }
 
         if (story.canContinue)
@@ -138,15 +122,17 @@ public class DialogueController : MonoBehaviour
                 break;
         }
 
-//        rooms[temp].SetActive(false);
-//        rooms[index].SetActive(true);
+        rooms[temp].SetActive(false);
+        rooms[index].SetActive(true);
+
+       
     }
 
     void FadeToBlack(bool isFadeOut)
     {
-      //  anim.gameObject.SetActive(true);
+        anim.gameObject.SetActive(true);
         string animation = (isFadeOut) ? "FadeOut" : "FadeIn";
-       // anim.SetTrigger(animation);
+        anim.SetTrigger(animation);
     }
 
     private void CheckTags()
@@ -173,11 +159,6 @@ public class DialogueController : MonoBehaviour
                 case "WaitUntil":
                     WaitFor = true;
                     break;
-
-                case "PictureTime":
-                    livingRoom.
-
-
 
                 default:
                     Debug.LogError($"Tag not found: {TAG}");

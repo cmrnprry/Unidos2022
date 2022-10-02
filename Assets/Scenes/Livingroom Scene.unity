@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &281325200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2188182722968361343, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+  m_PrefabInstance: {fileID: 2188182723193388051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee6a01e4b08f4507ab180b9194dd5dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +225,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2188182721765583857, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182721765583857, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182721765583857, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182721765583857, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182722111935688, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182722111935688, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182722111935688, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182722111935688, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2188182722484620034, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -301,6 +344,14 @@ PrefabInstance:
     - target: {fileID: 2188182722484620062, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
       propertyPath: m_Name
       value: Canvas - Living Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188182722968361342, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: livingRoom
+      value: 
+      objectReference: {fileID: 281325200}
+    - target: {fileID: 2188182723276306507, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88d6e86b4d4ff4404a62b1061d1e9b7c, type: 3}

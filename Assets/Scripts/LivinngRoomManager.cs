@@ -26,19 +26,16 @@ public class LivinngRoomManager : MonoBehaviour
     // then, set the correct one active. 
     public void readVars(string choice, bool pick)
     {
-        //bool first = (bool) story.variablesState["FirstDecor"];
-
-        Debug.Log("Value " + pick + " Poop" + choice);
-
 
         //where to put the birthday sign
         if (pick && (choice == "signChoice"))
         {
            //door
             firstPlacement[0].gameObject.SetActive(true);
+            return;
         }
         //wall
-        else { firstPlacement[1].gameObject.SetActive(true); }
+        else { firstPlacement[1].gameObject.SetActive(true); return; }
 
 
         //Wheree to put baloons 
@@ -47,20 +44,24 @@ public class LivinngRoomManager : MonoBehaviour
             //chair
             secondPlacement[0].gameObject.SetActive(true);
             secondPlacement[1].gameObject.SetActive(true);
+            return;
         }
         else {
-            //wall
+            
             secondPlacement[2].gameObject.SetActive(true);
             secondPlacement[3].gameObject.SetActive(true);
+            return;
         }
 
         if (pick && (choice == "stramerChoice"))
         {
             //TV
             thirdPlacement[0].gameObject.SetActive(true);
+            return;
         }
         else{  //table
             thirdPlacement[1].gameObject.SetActive(true);
+            return;
         }
 
 

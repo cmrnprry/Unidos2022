@@ -45,6 +45,10 @@ public class DialogueController : MonoBehaviour
     public static DialogueController instance;
     public LivinngRoomManager livingRoom;
 
+    [SerializeField]
+    private Button buttonPrefab = null;
+    public GameObject choiceHolder;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -57,7 +61,7 @@ public class DialogueController : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
-        livingRoom = FindObjectOfType<LivinngRoomManager>();
+        //livingRoom = FindObjectOfType<LivinngRoomManager>();
     }
 
     private void Start()
@@ -83,6 +87,7 @@ public class DialogueController : MonoBehaviour
 
     private IEnumerator ShowNextLine()
     {
+        RemoveChildren();
         if (WaitFor)
             yield return new WaitUntil(() => !WaitFor);
 
@@ -116,127 +121,173 @@ public class DialogueController : MonoBehaviour
         }
         else
         {
-            //end of game or choice
-        }
-
-        yield return null;
-
-    }
-
-    void Tranition()
-    {
-        int temp = index;
-        switch (side)
-        {
-            case "left":
-                index -= 1;
-                break;
-            case "right":
-                index += 1;
-                break;
-            default:
-                Debug.LogWarning("Transition unclear");
-                break;
-        }
-
-        rooms[temp].SetActive(false);
-        rooms[index].SetActive(true);
-
-       
-    }
-
-    void FadeToBlack(bool isFadeOut)
-    {
-        anim.gameObject.SetActive(true);
-        string animation = (isFadeOut) ? "FadeOut" : "FadeIn";
-        anim.SetTrigger(animation);
-    }
-
-    private void CheckTags()
-    {
-        foreach (string tag in currentTags)
-        {
-            tag.ToLower().Replace(" ", "");
-            string[] split = tag.Split(':', StringSplitOptions.RemoveEmptyEntries);
-            string TAG = split[0];
-            switch (TAG)
+            for (int i = 0; i < story.currentChoices.Count; i++)
             {
-                case "speaker":
-                    string character = split[1];
-                    break;
+                Choice choice = story.currentChoices[i];
+                Button button = CreateChoiceView(choice.text.Trim());
+                // Tell the button what to do when we press it
+                button.onClick.AddListener(delegate {
+                    OnClickChoiceButton(choice);
+                });
+            }
 
-                case "prompt":
-                    side = split[1].Trim();
-                    //set the side
-                    exclaimation.GetComponent<RectTransform>().anchoredPosition = (side == "left") ? new Vector3(-758, 235, 0) : new Vector3(784, 235, 0);
-                    exclaimation.SetActive(true);
-                    WaitFor = true;
-                    break;
+            yield return null;
 
-                case "WaitUntil":
-                    WaitFor = true;
+        }
+    }
+
+        void Tranition()
+        {
+            int temp = index;
+            switch (side)
+            {
+                case "left":
+                    index -= 1;
                     break;
-                case "Recipe":
-                    KitchenManager.Instance.NextStep(int.Parse(split[1]));
+                case "right":
+                    index += 1;
                     break;
                 default:
-                    Debug.LogError($"Tag not found: {TAG}");
+                    Debug.LogWarning("Transition unclear");
                     break;
             }
+
+            rooms[temp].SetActive(false);
+            rooms[index].SetActive(true);
+
+
         }
-    }
 
-    public void SetBool(bool value)
-    {
-        WaitFor = value;
-    }
-
-    public IEnumerator incrementText(string text, TMP_Text currentTextbox)
-    {
-        //set the text
-        isTyping = true;
-        currentTextbox.alpha = 0;
-        currentTextbox.text = text;
-
-        yield return new WaitUntil(() => currentTextbox.gameObject.activeSelf);
-        yield return new WaitForSeconds(0.15f);
-
-        currentTextbox.ForceMeshUpdate();
-        TMP_TextInfo textInfo = currentTextbox.textInfo;
-        int totalCharacters = currentTextbox.textInfo.characterCount;
-
-        for (int i = 0; i < totalCharacters; i++)
+        void FadeToBlack(bool isFadeOut)
         {
-            if (currentTextbox == null)
+            anim.gameObject.SetActive(true);
+            string animation = (isFadeOut) ? "FadeOut" : "FadeIn";
+            anim.SetTrigger(animation);
+        }
+
+        private void CheckTags()
+        {
+            foreach (string tag in currentTags)
             {
-                break;
+                tag.ToLower().Replace(" ", "");
+                string[] split = tag.Split(':', StringSplitOptions.RemoveEmptyEntries);
+                string TAG = split[0];
+                switch (TAG)
+                {
+                    case "speaker":
+                        string character = split[1];
+                        break;
+
+                    case "prompt":
+                        side = split[1].Trim();
+                        //set the side
+                        exclaimation.GetComponent<RectTransform>().anchoredPosition = (side == "left") ? new Vector3(-758, 235, 0) : new Vector3(784, 235, 0);
+                        exclaimation.SetActive(true);
+                        WaitFor = true;
+                        break;
+
+                    case "WaitUntil":
+                        WaitFor = true;
+                        break;
+                    case "Recipe":
+                        KitchenManager.Instance.NextStep(int.Parse(split[1]));
+                        break;
+                    default:
+                        Debug.LogError($"Tag not found: {TAG}");
+                        break;
+                }
+            }
+        }
+
+        public void SetBool(bool value)
+        {
+            WaitFor = value;
+        }
+
+        public IEnumerator incrementText(string text, TMP_Text currentTextbox)
+        {
+            //set the text
+            isTyping = true;
+            currentTextbox.alpha = 0;
+            currentTextbox.text = text;
+
+            yield return new WaitUntil(() => currentTextbox.gameObject.activeSelf);
+            yield return new WaitForSeconds(0.15f);
+
+            currentTextbox.ForceMeshUpdate();
+            TMP_TextInfo textInfo = currentTextbox.textInfo;
+            int totalCharacters = currentTextbox.textInfo.characterCount;
+
+            for (int i = 0; i < totalCharacters; i++)
+            {
+                if (currentTextbox == null)
+                {
+                    break;
+                }
+
+                // Get the index of the material used by the current character.
+                int materialIndex = textInfo.characterInfo[i].materialReferenceIndex;
+                TMP_MeshInfo meshinfo = textInfo.meshInfo[materialIndex];
+
+                // Get the vertex colors of the mesh used by this text element (character or sprite).
+                var newVertexColors = meshinfo.colors32;
+
+                // Get the index of the first vertex used by this text element.
+                int vertexIndex = textInfo.characterInfo[i].vertexIndex;
+
+                // Set all to full alpha
+                newVertexColors[vertexIndex + 0].a = 255;
+                newVertexColors[vertexIndex + 1].a = 255;
+                newVertexColors[vertexIndex + 2].a = 255;
+                newVertexColors[vertexIndex + 3].a = 255;
+
+                currentTextbox.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
+
+                yield return new WaitForSeconds(wait);
             }
 
-            // Get the index of the material used by the current character.
-            int materialIndex = textInfo.characterInfo[i].materialReferenceIndex;
-            TMP_MeshInfo meshinfo = textInfo.meshInfo[materialIndex];
-
-            // Get the vertex colors of the mesh used by this text element (character or sprite).
-            var newVertexColors = meshinfo.colors32;
-
-            // Get the index of the first vertex used by this text element.
-            int vertexIndex = textInfo.characterInfo[i].vertexIndex;
-
-            // Set all to full alpha
-            newVertexColors[vertexIndex + 0].a = 255;
-            newVertexColors[vertexIndex + 1].a = 255;
-            newVertexColors[vertexIndex + 2].a = 255;
-            newVertexColors[vertexIndex + 3].a = 255;
-
-            currentTextbox.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
-
-            yield return new WaitForSeconds(wait);
+            //currentTextbox.alpha = 225;
+            isTyping = false;
+            yield return new WaitForFixedUpdate();
+            yield return new WaitUntil(() => Input.GetButtonDown("Continue"));
+            coroutine = StartCoroutine(ShowNextLine());
         }
 
-        //currentTextbox.alpha = 225;
-        isTyping = false;
-        yield return new WaitForFixedUpdate();
-        yield return new WaitUntil(() => Input.GetButtonDown("Continue"));
-        coroutine = StartCoroutine(ShowNextLine());
+        // Creates a button showing the choice text
+        Button CreateChoiceView(string text)
+        {
+            // Creates the button from a prefab
+            Button choice = Instantiate(buttonPrefab) as Button;
+            choice.transform.SetParent(choiceHolder.transform, false);
+
+            // Gets the text from the button prefab
+            Text choiceText = choice.GetComponentInChildren<Text>();
+            choiceText.text = text;
+
+            // Make the button expand to fit the text
+            HorizontalLayoutGroup layoutGroup = choiceHolder.GetComponent<HorizontalLayoutGroup>();
+            layoutGroup.childForceExpandHeight = false;
+
+            return choice;
+        }
+
+    // Destroys all the children of this gameobject (all the UI)
+    void RemoveChildren()
+    {
+        int childCount = choiceHolder.transform.childCount;
+        for (int i = childCount - 1; i >= 0; --i)
+        {
+            GameObject.Destroy(choiceHolder.transform.GetChild(i).gameObject);
+        }
     }
-}
+
+
+
+    // When we click the choice button, tell the story to choose that choice!
+    void OnClickChoiceButton(Choice choice)
+        {
+            story.ChooseChoiceIndex(choice.index);
+            StartCoroutine(ShowNextLine());
+    }
+    }
+

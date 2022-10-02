@@ -32,7 +32,10 @@ Pues, now we add the <color=red>rice</color> to the <color=green>pan</color>. #s
 //– do the action –
 
 ¡Guau, que cocinera! #speaker: Abuelita
-Ok, I’ll stir the rice while you chop the <color=red>garlic</color> and <color=red>onion</color>. Then, can you add them to the <color=blue>pot</color>? #speaker: Abuelita #WaitUntil 
+Ok, I’ll stir the rice. Can you chop the <color=red>garlic</color> and add it to the <color=blue>pot</color>? #speaker: Abuelita #WaitUntil 
+// -do the action -
+
+Now, chop the <color=red>onion</color> to add to the <color=blue>pot</color>, por favor. #speaker: Abuelita #WaitUntil 
 
 //– do the action –
 

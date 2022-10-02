@@ -43,6 +43,7 @@ public class DialogueController : MonoBehaviour
     private int index = 1;  //start in kitchen
 
     public static DialogueController instance;
+    public LivinngRoomManager livingRoom;
 
     private void Awake()
     {
@@ -56,12 +57,28 @@ public class DialogueController : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
+        livingRoom = FindObjectOfType<LivinngRoomManager>();
     }
 
     private void Start()
     {
         story = new Story(ink.text);
         coroutine = StartCoroutine(ShowNextLine());
+
+        story.ObserveVariable("stramerChoice", (string varName, object newValue) =>
+        {
+            livingRoom.readVars(varName, (bool)newValue);
+        });
+
+        story.ObserveVariable("signChoice", (string varName, object newValue) =>
+        {
+            livingRoom.readVars(varName, (bool)newValue);
+        });
+
+        story.ObserveVariable("baloonChoice", (string varName, object newValue) =>
+        {
+            livingRoom.readVars(varName, (bool)newValue);
+        });
     }
 
     private IEnumerator ShowNextLine()

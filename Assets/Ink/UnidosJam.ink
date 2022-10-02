@@ -1,3 +1,7 @@
+VAR stramerChoice = false
+VAR baloonChoice = false
+VAR signChoice = false
+
 Gracias mamá for helping me with dinner. #speaker: Abuelita
 First, we need to cook the rice. #speaker: Abuelita
 Can you grab the <color=red>olive oil</color> and pour some into the <color=blue>pot</color> for the frijoles? #speaker: Abuelita #WaitUntil 
@@ -16,10 +20,12 @@ Aquí? Near the T.V.? #speaker: Cousin1
 O aquí en la mesa? #speaker: Cousin2
 
 * [near the T.V.]
+    ~ stramerChoice = true
     HA! Knew it. #speaker: Cousin1
     Cállate. #speaker: Cousin2
 
 * [on the table]
+    ~ stramerChoice =  false
     I knew you had good taste, prima. #speaker: Cousin2
 
 - ¡Mijita! #speaker: Abuelita #prompt: right
@@ -96,9 +102,11 @@ What do you think? Tied to the chairs? #speaker: Cousin2
 Or taped to the wall? #speaker: Cousin1
 
 * [tied to the chairs]
+    ~ baloonChoice = false
     Finally!! Someone with taste. #speaker: Cousin2
 
 * [taped to the wall]
+   ~ baloonChoice = false
     Clásica! Perfecto. #speaker: Cousin1
     Thank you, cousin. #speaker: Cousin1
 
@@ -130,14 +138,16 @@ Across the wall? #speaker: Cousin2
 Or hanging in the entrance? #speaker: Cousin1
 
 * [Across the wall]
+    ~signChoice  = false
     Good choice. #speaker: Cousin2
 
 * [In the entrance]
+    ~signChoice =  true
     Aw, I think that’ll look great. #speaker: Cousin1
 
 - Food is ready! #speaker: Abuelita
 
-Sweet! Let's Party! #speaker: Cousin1
+Sweet! Let's Party! #speaker: Cousin1  #PictureTime
 
 //— now is the part where you put everyone together for a party! —
 

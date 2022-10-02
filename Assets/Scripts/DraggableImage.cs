@@ -23,7 +23,7 @@ public class DraggableImage : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         _dragging = true;
     }
 
-    public void OnPointerUp(PointerEventData data)
+    public virtual void OnPointerUp(PointerEventData data)
     {
         _dragging = false;
         //Better to do this once, rather than every frame

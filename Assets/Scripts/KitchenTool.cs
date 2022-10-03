@@ -9,6 +9,7 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject tempParent;
     public GameObject OrigParent;
     public RectTransform rectTransform;
+    public bool canSizzle = false;//ff
 
     public bool isChopper;
 
@@ -27,16 +28,20 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (KitchenManager.Instance.HasItem())
         {
+            if(name == "FryingPan" || name == "SaucePanTop"){//ff
+              canSizzle = true;//ff
+            }else{
+              canSizzle = false;//ff
+            }
             Debug.Log("Cursor Entering " + name + " GameObject");
             KitchenManager.Instance.ChangeLastToolHovered(this);
             transform.SetParent(tempParent.transform);
         }
-        
+
     }
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         Debug.Log("Cursor Exiting " + name + " GameObject");
-
     }
     public void SetOrigParent()
     {

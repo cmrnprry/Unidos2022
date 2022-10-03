@@ -41,20 +41,20 @@ public class KitchenManager : Singleton<KitchenManager>
     public List<RecipeStepScriptableObject> currentSteps;
 
     public bool waitingForNextStep;
-    
+
     public bool recipesFinished;
     public KitchenTool? lastToolHovered;
     public RecipeItem? currentItem;
 
     public RecipeItem? choppingItem;
 
-    //need this since one of the recipes is water and we need to transform one and then the other is gonna become a 
+    //need this since one of the recipes is water and we need to transform one and then the other is gonna become a
     //regular recipe item
     public List<GameObject> waterSource;
     public bool waterFlag = false;
-    
 
-    private string debugTxt = "food - {0} spot - {1}"; 
+
+    private string debugTxt = "food - {0} spot - {1}";
     public TextMeshProUGUI textbox;
 
     public ChoppingMinigame mg;
@@ -63,7 +63,7 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         //waitingForNextStep = true;
         recipesFinished = false;
-       
+
     }
 
     void Update()
@@ -71,7 +71,7 @@ public class KitchenManager : Singleton<KitchenManager>
         if(waitingForNextStep)
         {
             //update dialogue manager we are done
-           
+
             waitingForNextStep = false;
             DialogueController.instance.WaitFor = false;
             //waitingForNextStep = false;
@@ -82,7 +82,7 @@ public class KitchenManager : Singleton<KitchenManager>
             DialogueController.instance.WaitFor = false;
         }
     }
-    //wait for step to finish -- 
+    //wait for step to finish --
     //oops all side effects
     public void CheckStep(Food food)
     {
@@ -91,6 +91,11 @@ public class KitchenManager : Singleton<KitchenManager>
             //hate this but gotta love that it works
             Vector3[] corners = new Vector3[4];
             Debug.Log(currentItem?.name);
+            Debug.Log(lastToolHovered.canSizzle);
+            Debug.Log(lastToolHovered);
+            if(lastToolHovered.canSizzle){
+              GameObject.Find("Audio Controller").GetComponent<AudioController>().PlaySizzle();//ff
+            }
             currentItem.rectTransform.GetWorldCorners(corners);
             Rect rec1 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
 
@@ -108,13 +113,12 @@ public class KitchenManager : Singleton<KitchenManager>
                         currentItem.isChopping = true;
                         choppingItem = currentItem;
                     }
-                    
+
                     if (tmp.First().shouldHide)
                     {
                         //hide item?
                         currentItem.HideFood();
                     }
-                    
                     currentSteps.Remove(tmp.First());
                     //update tool to be next image?
 
@@ -134,7 +138,7 @@ public class KitchenManager : Singleton<KitchenManager>
             {
                 waitingForNextStep = true;
             }
-            
+
         }
         if (!waterFlag)
         {
@@ -182,11 +186,12 @@ public class KitchenManager : Singleton<KitchenManager>
             recipesFinished = true;
             //textbox.text = "Done!";
         }
-        
+
     }
 
     public void ChopDone()
     {
+        GetComponent<AudioSource>().Play();//ff
         choppingItem.OnChopped();
         choppingItem = null;
         currentSteps.RemoveAt(0);
@@ -204,14 +209,14 @@ public class KitchenManager : Singleton<KitchenManager>
         kt.ifWater.enabled = true;
         kt.ifWater.TransformFood();
         kt.gameObject.transform.SetParent(kt.ifWater.OrigParent.transform);
-        
+
         var tmpWater = waterSource[0].GetComponent<KitchenTool>();
         tmpWater.ifWater.enabled = true;
         tmpWater.gameObject.transform.SetParent(tmpWater.ifWater.OrigParent.transform);
 
         kt.enabled = false;
         tmpWater.enabled = false;
-        
+
     }
 
 }

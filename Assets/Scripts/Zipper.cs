@@ -24,7 +24,8 @@ public class Zipper : MonoBehaviour
     private Sequence seqMovvement = null;
     private Sequence seqRotation = null;
 
-
+    [SerializeField]
+    AudioSource[] zipSounds;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,11 @@ public class Zipper : MonoBehaviour
             if (CanDrag && (Input.mousePosition.y > OPEN.y && Input.mousePosition.y <= Current))
             {
                 Resistance(ProgressState);
+                int x = Random.Range(0,2);//ff
+                  if(!zipSounds[0].isPlaying && !zipSounds[1].isPlaying){
+                    zipSounds[x].pitch = zipSounds[x].pitch + ((float) Random.Range(-1,2) / 10f);
+                    zipSounds[x].Play();
+                  }//ff
                 zipper.position = new Vector3(zipper.position.x, Input.mousePosition.y, 1f);
             }
 

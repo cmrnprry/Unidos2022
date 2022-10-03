@@ -10,8 +10,7 @@ public class AudioController : MonoBehaviour
     private AudioSource audioSource;//ff
     private AudioSource[] sources;//ff
     public AudioMixer mixer;
-    private float BGMvolume;
-    private float SFXvolume;
+    private float bgm = 1;
 
     public static AudioController instance;
 
@@ -29,17 +28,25 @@ public class AudioController : MonoBehaviour
 
     public void SetBGMVolume(float vol)
     {
+        bgm = vol;
         mixer.SetFloat("BGMVolume", Mathf.Log10(vol) * 20);
     }
 
     public void SetAudio(int index)//ff
     {
         //make this transisition smoother
+        StartCoroutine(SmoothAudio(index));
 
+    }//ff
+
+    private IEnumerator SmoothAudio(int index)
+    {
         foreach (AudioSource source in sources)
         {
             if (source.isPlaying)
             {
+                source.DOFade(0, 0.5f);
+                yield return new WaitForSeconds(1);
                 source.Pause();
             }
             if (source.clip == musicClips[index])
@@ -48,7 +55,10 @@ public class AudioController : MonoBehaviour
             }
         }
         audioSource.Play();
-    }//ff
+        audioSource.DOFade(bgm, 1);
+        yield return null;        
+    }
+
 
     public void PlayUIAccept()
     {//ff

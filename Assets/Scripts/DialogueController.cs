@@ -50,6 +50,7 @@ public class DialogueController : MonoBehaviour
     public GameObject choiceHolder;
     public AudioClip talkingSfx; //FF
     private AudioSource audioSource; //FF
+    public GameObject settings;
 
     private void Awake()
     {
@@ -87,6 +88,14 @@ public class DialogueController : MonoBehaviour
         {
             livingRoom.readVars(varName, (bool)newValue);
         });
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settings.SetActive(!settings.activeSelf);
+        }
     }
 
     private IEnumerator ShowNextLine()

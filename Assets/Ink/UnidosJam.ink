@@ -68,7 +68,7 @@ Add the <color=red>beans</color>, <color=red>cilantro</color>, <color=red>cumin<
 
 //– do the action –
 
-¡Agh! I need help again! #speaker: aunt
+¡Agh! I need help again! #speaker: aunt #ButtonTime
 Ay ay ay… #speaker: Abuelita
 ¡Go! ¡Rápidamente! #speaker: Abuelita #prompt: right
 

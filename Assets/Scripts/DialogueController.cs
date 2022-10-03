@@ -50,6 +50,7 @@ public class DialogueController : MonoBehaviour
     public GameObject choiceHolder;
     public AudioClip talkingSfx; //FF
     private AudioSource audioSource; //FF
+    public GameObject settings;
 
     
 
@@ -89,6 +90,14 @@ public class DialogueController : MonoBehaviour
         {
             livingRoom.readVars(varName, (bool)newValue);
         });
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settings.SetActive(!settings.activeSelf);
+        }
     }
 
     private IEnumerator ShowNextLine()
@@ -207,6 +216,9 @@ public class DialogueController : MonoBehaviour
                     livingRoom.SnapPicture();
                     //turn off text box
                     //hand written text
+                    break;
+                case "ButtonTime":
+                    Zipper.zipped = true;
                     break;
                 default:
                     Debug.LogError($"Tag not found: {TAG}");

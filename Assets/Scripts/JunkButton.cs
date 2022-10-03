@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class JunkButton : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class JunkButton : MonoBehaviour
     public float floor;
     public GameObject buttons;
     public GameObject zipper;
+    public GameObject zipperOther;
+    public SpriteRenderer Uncle;
+    public Sprite barney;
 
     private bool CanDrag = false;
     private Sequence seq = null;
-    private bool done;
+    private bool done = false;
 
     private void Update()
     {
@@ -20,6 +24,8 @@ public class JunkButton : MonoBehaviour
         {
             buttons.SetActive(true);
             zipper.SetActive(false);
+            zipperOther.SetActive(false);
+            Uncle.sprite = barney;
         }
 
         if (CanDrag && !done)

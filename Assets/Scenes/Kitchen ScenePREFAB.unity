@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KitchenCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2603678893815994746, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2603678893815994750, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -373,6 +377,26 @@ PrefabInstance:
     - target: {fileID: 2603678894434161803, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
       propertyPath: m_Particles.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603678894523571198, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991534564493358385, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991534564493358385, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991534564493358385, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127480211402989193, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc40a50e9ae2a5746afc2d30630d842a, type: 3}

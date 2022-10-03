@@ -51,6 +51,8 @@ public class DialogueController : MonoBehaviour
     public AudioClip talkingSfx; //FF
     private AudioSource audioSource; //FF
 
+    
+
     private void Awake()
     {
         audioSource = GameObject.Find("TalkingSFX").GetComponent<AudioSource>(); //FF
@@ -160,7 +162,10 @@ public class DialogueController : MonoBehaviour
         rooms[temp].SetActive(false);
         rooms[index].SetActive(true);
 
-
+        if(index==1)
+        {
+            KitchenManager.Instance.ResetCabinets();
+        }
     }
 
     void FadeToBlack(bool isFadeOut)
@@ -305,4 +310,6 @@ public class DialogueController : MonoBehaviour
         story.ChooseChoiceIndex(choice.index);
         StartCoroutine(ShowNextLine());
     }
+
+    
 }

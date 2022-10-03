@@ -34,6 +34,8 @@ public enum KitchenPoint
 }
 public class KitchenManager : Singleton<KitchenManager>
 {
+    public OpenCabinet Fridge, Cabinet;
+
     public AudioSource chopSound; 
     public GameObject hideSpot;
 
@@ -44,6 +46,11 @@ public class KitchenManager : Singleton<KitchenManager>
     public bool waitingForNextStep;
 
     public bool recipesFinished;
+    public bool waitForDialogueManager;
+
+    public KitchenTool choppingBoard;
+    public RecipeItem choppedItem;
+
     public KitchenTool? lastToolHovered;
     public RecipeItem? currentItem;
 
@@ -62,7 +69,7 @@ public class KitchenManager : Singleton<KitchenManager>
     //not terribly happy about how this works but idk it works i guess
     void Start()
     {
-        //waitingForNextStep = true;
+        waitForDialogueManager = true;
         recipesFinished = false;
         chopSound = GetComponent<AudioSource>();
     }
@@ -87,68 +94,83 @@ public class KitchenManager : Singleton<KitchenManager>
     //oops all side effects
     public void CheckStep(Food food)
     {
-        if(lastToolHovered != null)
+        if(!waitForDialogueManager)
         {
-            //hate this but gotta love that it works
-            Vector3[] corners = new Vector3[4];
-            Debug.Log(currentItem?.name);
-            Debug.Log(lastToolHovered.canSizzle);
-            Debug.Log(lastToolHovered);
-            if(lastToolHovered.canSizzle){
-              GameObject.Find("Audio Controller").GetComponent<AudioController>().PlaySizzle();//ff
-            }
-            currentItem.rectTransform.GetWorldCorners(corners);
-            Rect rec1 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
-
-            lastToolHovered.rectTransform.GetWorldCorners(corners);
-            Rect rec2 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
-
-            if (rec1.Overlaps(rec2))
+            if(lastToolHovered != null)
             {
-                var tmp = currentSteps.Where(p => p.startedFood == food && p.neededSpot == lastToolHovered?.point);
-                if (tmp.Any())
+                //hate this but gotta love that it works
+                Vector3[] corners = new Vector3[4];
+
+                Debug.Log(lastToolHovered.canSizzle);
+                Debug.Log(lastToolHovered);
+                
+                currentItem.rectTransform.GetWorldCorners(corners);
+                Rect rec1 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
+
+                lastToolHovered.rectTransform.GetWorldCorners(corners);
+                Rect rec2 = new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
+
+                if (rec1.Overlaps(rec2))
                 {
-                    if(lastToolHovered.isChopper)
+                    var tmp = currentSteps.Where(p => p.startedFood == food && p.neededSpot == lastToolHovered?.point);
+                    if (tmp.Any())
                     {
-                        currentItem.lastPosition = lastToolHovered.transform.position;
-                        currentItem.isChopping = true;
-                        choppingItem = currentItem;
-                    }
+                        if (lastToolHovered.canSizzle)
+                        {
+                            GameObject.Find("Audio Controller").GetComponent<AudioController>().PlaySizzle();//ff
+                        }
 
-                    if (tmp.First().shouldHide)
-                    {
-                        //hide item?
-                        currentItem.HideFood();
-                    }
-                    currentSteps.Remove(tmp.First());
-                    //update tool to be next image?
+                        if (lastToolHovered.isChopper)
+                        {
+                            currentItem.lastPosition = lastToolHovered.chopSpot.position;
+                            currentItem.isChopping = true;
+                            choppingItem = currentItem;
+                        }
 
-                    //Okay since we step out of the function we have to do this last i believe
-                    if (lastToolHovered.point == KitchenPoint.Water)
-                    {
-                        //okay we need to handle the water step
-                        WaterStep(lastToolHovered);
+                        if (tmp.First().shouldHide)
+                        {
+                            //hide item?
+                            if(choppedItem != null && currentItem == choppedItem)
+                            {
+                                //okay then we can remove chopped Item and then reenable chopboard
+                                choppingBoard.UnhideChopImage();
+                                choppedItem = null;
+                            }
+                            currentItem.HideFood();
+                            
+                        }
+                        currentSteps.Remove(tmp.First());
+                        //update tool to be next image?
+
+                        //Okay since we step out of the function we have to do this last i believe
+                        if (lastToolHovered.point == KitchenPoint.Water)
+                        {
+                            //okay we need to handle the water step
+                            WaterStep(lastToolHovered);
+                        }
                     }
                 }
-            }
-            if (currentSteps.Count > 0 && currentSteps[0].isChoppingGame)
-            {
-                mg.StartMinigame();
-            }
-            else if (currentSteps.Count == 0)
-            {
-                waitingForNextStep = true;
-            }
+                if (currentSteps.Count > 0 && currentSteps[0].isChoppingGame)
+                {
+                    mg.StartMinigame();
+                }
+                else if (currentSteps.Count == 0)
+                {
+                    waitingForNextStep = true;
+                }
 
+            }
+            
         }
+           
         if (!waterFlag)
         {
-            ResetToolHovered();
+           ResetToolHovered();
         }
         if (waterFlag)
         {
-            lastToolHovered = null;
-            waterFlag = false;
+           lastToolHovered = null;
+           waterFlag = false;
         }
     }
     public void ResetToolHovered()
@@ -175,6 +197,7 @@ public class KitchenManager : Singleton<KitchenManager>
     }
     public void NextStep(int steps)
     {
+        waitForDialogueManager = false;
         waitingForNextStep = false;
         if(recipeSteps.Count > 0)
         {
@@ -201,13 +224,18 @@ public class KitchenManager : Singleton<KitchenManager>
 
     public void ChopDone()
     {
+        //okay we want to set this to not ray cast until after chopped item has been used?
+        //so 
         choppingItem.OnChopped();
+        choppedItem = choppingItem;
         choppingItem = null;
         currentSteps.RemoveAt(0);
         if(currentSteps.Count==0)
         {
             waitingForNextStep = true;
         }
+        choppingBoard.HideChopImage();
+
     }
 
     public void WaterStep(KitchenTool kt)
@@ -227,5 +255,16 @@ public class KitchenManager : Singleton<KitchenManager>
         tmpWater.enabled = false;
 
     }
+    public void ResetCabinets()
+    {
+        //if
+        if(gameObject.activeInHierarchy)
+        {
+            //then we reset cabinets
+            Fridge.ResetCabinet();
+            Cabinet.ResetCabinet();
 
+        }
+
+    }
 }

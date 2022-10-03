@@ -16,6 +16,7 @@ public class RecipeItem : DraggableImage
     public bool isChopping;
 
 
+
     public Image curImage;
     public Sprite transformedSprite;
 
@@ -24,16 +25,12 @@ public class RecipeItem : DraggableImage
 
     public void OnChopped()
     {
-
         isChopping = false;
         TransformFood();
 
-        //tbox.text = transformed.ToString();
         transform.SetParent(OrigParent.transform);
-        var tmpPos = transform.position;
-        var tmpVec = new Vector3(0, -100);
-        lastPosition = tmpPos - tmpVec;
         transform.position = lastPosition;
+       
     }
     public override void OnPointerDown(PointerEventData data)
     {
@@ -57,12 +54,11 @@ public class RecipeItem : DraggableImage
     public void OverlapCheck(PointerEventData data)
     {
         KitchenManager.Instance.CheckStep(current);
-        transform.position = lastPosition;
         if(isChopping)
         {
-            //set us to our block
             this.transform.SetParent(choppyBlock.transform);
         }
+        transform.position = lastPosition;
     }
 
     public void HideFood()
@@ -71,6 +67,7 @@ public class RecipeItem : DraggableImage
 
         lastPosition = KitchenManager.Instance.hideSpot.transform.position;
         transform.position = lastPosition;
+
     }
 
     public void TransformFood()

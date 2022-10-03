@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,6 +13,8 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public bool canSizzle = false;//ff
 
     public bool isChopper;
+    public Image chopImage;
+    public RectTransform chopSpot;
 
     //okay if we do this then we are hard coding in how we handle dotweens
     //public GameObject sandwichSpot;
@@ -46,5 +49,14 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void SetOrigParent()
     {
         transform.SetParent(OrigParent.transform);
+    }
+
+    public void HideChopImage()
+    {
+        chopImage.raycastTarget = false;
+    }
+    public void UnhideChopImage()
+    {
+        chopImage.raycastTarget = true;
     }
 }

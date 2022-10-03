@@ -21,6 +21,7 @@ public class Zipper : MonoBehaviour
     public float StateThree;
 
     public static bool zipped = false;
+    public bool zip = false;
     private Sequence seqMovvement = null;
     private Sequence seqRotation = null;
 
@@ -38,10 +39,10 @@ public class Zipper : MonoBehaviour
     private void Update()
     {
         //check if reached end
-        if (Current == CLOSED.y && zipper.position.y >= CLOSED.y - 10f)
+        if (Current == CLOSED.y && zipper.position.y >= CLOSED.y - 10f && !zip)
         {
-            zipped = true;
             DialogueController.instance.SetBool(false);
+            zip = true;
         }
         else
         {
@@ -137,7 +138,7 @@ public class Zipper : MonoBehaviour
         seqMovvement = DOTween.Sequence();
         seqRotation = DOTween.Sequence();
 
-        if (zipper.position.y < CLOSED.y && zipper.anchoredPosition.y > -413f && !zipped)
+        if (zipper.position.y < CLOSED.y && zipper.anchoredPosition.y > -413f && !zip)
         {
             var pos = new Vector3(zipper.position.x, zipper.position.y - 25, 0f);
             seqMovvement.Append(zipper.DOMove(pos, 2, false));

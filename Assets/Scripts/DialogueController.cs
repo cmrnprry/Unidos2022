@@ -212,6 +212,9 @@ public class DialogueController : MonoBehaviour
                     //turn off text box
                     //hand written text
                     break;
+                case "ButtonTime":
+                    Zipper.zipped = true;
+                    break;
                 default:
                     Debug.LogError($"Tag not found: {TAG}");
                     break;

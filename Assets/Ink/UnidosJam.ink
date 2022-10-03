@@ -88,7 +88,7 @@ You’re a lifesaver! #speaker: aunt
 //– exclamation prompt –
 
 It almost burned, but good thing you have grandma to watch out. #speaker: Abuelita
-Add <color=red>water</color> and <color=red>chicken seasoning</color> to make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil #Recipe: 2
+Add <color=red>chicken seasoning</color> to <color=red>water</color> to make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil #Recipe: 2
  
 //– do the action –
 

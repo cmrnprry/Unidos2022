@@ -8,8 +8,6 @@ Can you grab the <color=red>olive oil</color> and pour some into the <color=blue
 //– do the action –
 Next, we need the <color=red>vegetable oil</color> for the rice in the <color=green>frying pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 1
 
-//– do the action –
-
 Oye! We need some help over here! #speaker: Cousin1
 Go ahead. I’ll be here. #speaker: Abuelita #prompt: left
 

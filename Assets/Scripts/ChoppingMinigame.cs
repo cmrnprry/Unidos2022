@@ -29,6 +29,7 @@ public class ChoppingMinigame : MonoBehaviour
                 if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
                 {
                     particles.Play();
+                    KitchenManager.Instance.OnChop();
                     chopsLeft -= 1;
                 }
             }

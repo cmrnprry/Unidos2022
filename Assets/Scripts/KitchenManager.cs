@@ -34,6 +34,7 @@ public enum KitchenPoint
 }
 public class KitchenManager : Singleton<KitchenManager>
 {
+    public AudioSource chopSound; 
     public GameObject hideSpot;
 
     public List<RecipeStepScriptableObject> recipeSteps;
@@ -63,7 +64,7 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         //waitingForNextStep = true;
         recipesFinished = false;
-
+        chopSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -189,9 +190,17 @@ public class KitchenManager : Singleton<KitchenManager>
 
     }
 
+    public void OnChop()
+    {
+        if (!chopSound.isPlaying)
+        {
+            chopSound.Play();
+        }
+        //GetComponent<AudioSource>().Play();//ff
+    }
+
     public void ChopDone()
     {
-        GetComponent<AudioSource>().Play();//ff
         choppingItem.OnChopped();
         choppingItem = null;
         currentSteps.RemoveAt(0);

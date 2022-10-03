@@ -14,17 +14,17 @@ public class RecipeItem : DraggableImage
     public GameObject OrigParent;
     public GameObject choppyBlock;
     public bool isChopping;
-    
+
 
     public Image curImage;
     public Sprite transformedSprite;
-    
+
     //removing on release
     public TextMeshProUGUI tbox;
 
     public void OnChopped()
     {
-        
+
         isChopping = false;
         TransformFood();
 
@@ -43,7 +43,7 @@ public class RecipeItem : DraggableImage
             lastPosition = transform.position;
             KitchenManager.Instance.SetCurrentItem(this);
         }
-        
+
     }
     public override void OnPointerUp(PointerEventData data)
     {
@@ -68,7 +68,7 @@ public class RecipeItem : DraggableImage
     public void HideFood()
     {
         //okay i guess we could also do something like play a dotween animation for the pot or something?
-       
+
         lastPosition = KitchenManager.Instance.hideSpot.transform.position;
         transform.position = lastPosition;
     }

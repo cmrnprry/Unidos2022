@@ -23,7 +23,7 @@ public class LivinngRoomManager : MonoBehaviour
     // THis is hard coded im sorry
     // So basically make a variable for the decor question
     // and make a list of the places the player can place the decor
-    // then, set the correct one active. 
+    // then, set the correct one active.
     public void readVars(string choice, bool pick)
     {
 
@@ -38,7 +38,7 @@ public class LivinngRoomManager : MonoBehaviour
         else { firstPlacement[1].gameObject.SetActive(true); return; }
 
 
-        //Wheree to put baloons 
+        //Wheree to put baloons
         if (pick && (choice == "baloonChoice"))
         {
             //chair
@@ -47,7 +47,7 @@ public class LivinngRoomManager : MonoBehaviour
             return;
         }
         else {
-            
+
             secondPlacement[2].gameObject.SetActive(true);
             secondPlacement[3].gameObject.SetActive(true);
             return;
@@ -76,8 +76,7 @@ public class LivinngRoomManager : MonoBehaviour
             Join(background.transform.DOScale
             (new Vector3(0.75f, 0.75f, 0.75f), 1));
         picture.Play();
-
-
+        GameObject.Find("Audio Controller").GetComponent<AudioController>().PlayCameraPic();//ff
     }
 
     public void showPlaces()
@@ -86,6 +85,6 @@ public class LivinngRoomManager : MonoBehaviour
     }
 
 
-   
+
 
 }

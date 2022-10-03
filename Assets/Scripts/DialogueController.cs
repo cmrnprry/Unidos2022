@@ -11,7 +11,7 @@ public class DialogueController : MonoBehaviour
 {
     /*want to control text:
      * speed
-     * size1 
+     * size1
      * position
     */
 
@@ -48,9 +48,13 @@ public class DialogueController : MonoBehaviour
     [SerializeField]
     private Button buttonPrefab = null;
     public GameObject choiceHolder;
+    public AudioClip talkingSfx; //FF
+    private AudioSource audioSource; //FF
 
     private void Awake()
     {
+        audioSource = GameObject.Find("TalkingSFX").GetComponent<AudioSource>(); //FF
+        audioSource.clip = talkingSfx;//FF
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -213,6 +217,10 @@ public class DialogueController : MonoBehaviour
 
     public IEnumerator incrementText(string text, TMP_Text currentTextbox)
     {
+        audioSource.DOFade(0.3f, 0.08f);//FF
+        if(!audioSource.isPlaying){//ff
+          audioSource.Play();//FF
+        }//ff
         //set the text
         isTyping = true;
         currentTextbox.alpha = 0;
@@ -252,7 +260,8 @@ public class DialogueController : MonoBehaviour
 
             yield return new WaitForSeconds(wait);
         }
-
+        audioSource.DOFade(0, 0.08f);//FF
+        //audioSource.Pause();//FF
         //currentTextbox.alpha = 225;
         isTyping = false;
         yield return new WaitForFixedUpdate();
@@ -297,4 +306,3 @@ public class DialogueController : MonoBehaviour
         StartCoroutine(ShowNextLine());
     }
 }
-

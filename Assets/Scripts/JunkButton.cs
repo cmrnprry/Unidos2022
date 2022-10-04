@@ -13,6 +13,7 @@ public class JunkButton : MonoBehaviour
     public GameObject zipperOther;
     public SpriteRenderer Uncle;
     public Sprite barney;
+    public GameObject otherUncle;
 
     private bool CanDrag = false;
     private Sequence seq = null;
@@ -20,12 +21,13 @@ public class JunkButton : MonoBehaviour
 
     private void Update()
     {
-        if (Zipper.zipped)
+        if (Zipper.Instance.zipped)
         {
             buttons.SetActive(true);
             zipper.SetActive(false);
             zipperOther.SetActive(false);
-            Uncle.sprite = barney;
+            Uncle.gameObject.SetActive(false);
+            otherUncle.SetActive(true);
         }
 
         if (CanDrag && !done)

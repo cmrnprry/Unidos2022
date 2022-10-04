@@ -215,7 +215,9 @@ public class DialogueController : MonoBehaviour
                 case "Recipe":
                     KitchenManager.Instance.NextStep(int.Parse(split[1]));
                     break;
-
+                case "RemoveBarrier":
+                    Zipper.Instance.barrier.SetActive(false);
+                    break;
                 case "PictureTime":
                     livingRoom.showPlaces();
                     backgrounTextBox.gameObject.SetActive(false);
@@ -224,7 +226,7 @@ public class DialogueController : MonoBehaviour
                     //hand written text
                     break;
                 case "ButtonTime":
-                    Zipper.zipped = true;
+                    Zipper.Instance.zipped = true;
                     break;
                 default:
                     Debug.LogError($"Tag not found: {TAG}");

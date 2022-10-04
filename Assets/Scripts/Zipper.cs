@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zipper : MonoBehaviour
+public class Zipper : Singleton<Zipper>
 {
     public Animator anim;
     private bool CanDrag = false;
@@ -11,6 +11,9 @@ public class Zipper : MonoBehaviour
     private int ProgressState = 0;
     public RectTransform zipper;
     public RectTransform tag;
+
+    [SerializeField]
+    public GameObject barrier;
 
     [Header("Zipper Bounds")]
     public Vector3 CLOSED;
@@ -20,7 +23,7 @@ public class Zipper : MonoBehaviour
     public float StateTwo;
     public float StateThree;
 
-    public static bool zipped = false;
+    public bool zipped = false;
     public bool zip = false;
     private Sequence seqMovvement = null;
     private Sequence seqRotation = null;
@@ -28,6 +31,7 @@ public class Zipper : MonoBehaviour
     [SerializeField]
     AudioSource[] zipSounds;
     // Start is called before the first frame update
+
     void Start()
     {
         DOTween.Init();
@@ -38,11 +42,13 @@ public class Zipper : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(Input.mousePosition.y);
         //check if reached end
         if (Current == CLOSED.y && zipper.position.y >= CLOSED.y - 10f && !zip)
         {
             DialogueController.instance.SetBool(false);
             zip = true;
+           
         }
         else
         {
@@ -153,7 +159,7 @@ public class Zipper : MonoBehaviour
     public void Animation(float value)
     {
         //float time = anim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
-        anim.Play("zipper", 0, value);
+        anim.Play("FinalZipper", 0, value);
         anim.speed = 0;
     }
 }

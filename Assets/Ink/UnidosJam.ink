@@ -64,7 +64,7 @@ You can go back to helping grandma now. #speaker: aunt #prompt: left
 //exclamation prompt –
 
 You’re back, finally! Pues… #speaker: Abuelita
-Add the <color=red>beans</color>, <color=red>cilantro</color>, <color=red>cumin</color> and <color=red>salt</color> to the <color=blue>pot</color>. #speaker: Abuelita #WaitUntil #Recipe: 4
+Add the <color=red>beans</color>, some <color=red>water</color>, <color=red>cilantro</color>, <color=red>cumin</color> and <color=red>salt</color> to the <color=blue>pot</color>. #speaker: Abuelita #WaitUntil #Recipe: 4
 
 //– do the action –
 
@@ -124,7 +124,7 @@ Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUnti
 
 //– do the action – 
 
-Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>water</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 5
+Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 5
 
 //– do the action – 
 

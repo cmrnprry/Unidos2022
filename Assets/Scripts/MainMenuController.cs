@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    public void Start()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
     public void ToggleMenu(GameObject obj)
     {
         obj.SetActive(!obj.activeSelf);

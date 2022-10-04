@@ -20,10 +20,18 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     //public GameObject sandwichSpot;
     //public GameObject baseLocation;
 
+    public Image ourImage;
+    public List<Sprite> nextImages;
+    int currentImage;
+
     public RecipeItem ifWater;
+
+    public bool hasBeans;
+
 
     public void Start()
     {
+        currentImage = -1;
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -58,5 +66,25 @@ public class KitchenTool : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void UnhideChopImage()
     {
         chopImage.raycastTarget = true;
+    }
+
+    public void NextImage()
+    {
+        currentImage++;
+        //okay so this is bad but fine
+        if (point == KitchenPoint.SaucePan)
+        {
+            if(hasBeans)
+            {
+                ourImage.sprite = nextImages[currentImage];
+            }
+            //otherwise we have added cumin before the beans and shouldn't progress images
+            //okay i think this is good.
+        }
+        else
+        {
+            ourImage.sprite = nextImages[currentImage];
+        }
+        
     }
 }

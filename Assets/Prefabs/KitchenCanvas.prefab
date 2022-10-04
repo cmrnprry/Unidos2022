@@ -739,7 +739,11 @@ MonoBehaviour:
   isChopper: 0
   chopImage: {fileID: 0}
   chopSpot: {fileID: 0}
+  ourImage: {fileID: 0}
+  nextImages: []
   ifWater: {fileID: 2603678892908766468}
+  isPot: 0
+  hasBeans: 0
 --- !u!1 &2603678893029655733
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,8 +904,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6a1c3d79dd6fd2644b870bdd16b1f7ae, type: 2}
   - {fileID: 11400000, guid: af93084704985a0438f0871521ff2851, type: 2}
   - {fileID: 11400000, guid: 0836643f3bab4754290b291eceadf5b7, type: 2}
-  - {fileID: 11400000, guid: 9518d344c4f0fa44883f170b91cce7c2, type: 2}
   - {fileID: 11400000, guid: b4d770f31bd8ea447b8800a2c4a47597, type: 2}
+  - {fileID: 11400000, guid: 9518d344c4f0fa44883f170b91cce7c2, type: 2}
   - {fileID: 11400000, guid: 1ab6ab1bcd8c5a94d908aa04c82ff4a7, type: 2}
   - {fileID: 11400000, guid: c05b7ba95a2e1004ebeb3d3befe63e96, type: 2}
   - {fileID: 11400000, guid: e5514f53a2798e2469ed35fcc8922682, type: 2}
@@ -916,6 +920,7 @@ MonoBehaviour:
   waitForDialogueManager: 0
   choppingBoard: {fileID: 2603678894523571193}
   choppedItem: {fileID: 0}
+  ricePan: {fileID: 2603678894950698430}
   lastToolHovered: {fileID: 0}
   currentItem: {fileID: 0}
   choppingItem: {fileID: 0}
@@ -2635,7 +2640,13 @@ MonoBehaviour:
   isChopper: 0
   chopImage: {fileID: 0}
   chopSpot: {fileID: 0}
+  ourImage: {fileID: 2603678894101550187}
+  nextImages:
+  - {fileID: -1396957467, guid: 8c58f876903e38f4591382c9df4c5780, type: 3}
+  - {fileID: -1203441874, guid: 402c59bc87beaa84fabed494c07b74b8, type: 3}
   ifWater: {fileID: 0}
+  isPot: 1
+  hasBeans: 0
 --- !u!1 &2603678894178159177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,7 +2844,11 @@ MonoBehaviour:
   isChopper: 0
   chopImage: {fileID: 0}
   chopSpot: {fileID: 0}
+  ourImage: {fileID: 0}
+  nextImages: []
   ifWater: {fileID: 2603678894277226975}
+  isPot: 0
+  hasBeans: 0
 --- !u!1 &2603678894345846927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,7 +2984,11 @@ MonoBehaviour:
   isChopper: 1
   chopImage: {fileID: 2603678894523571198}
   chopSpot: {fileID: 3412434682500344262}
+  ourImage: {fileID: 0}
+  nextImages: []
   ifWater: {fileID: 0}
+  isPot: 0
+  hasBeans: 0
 --- !u!1 &2603678894562575302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,7 +3437,14 @@ MonoBehaviour:
   isChopper: 0
   chopImage: {fileID: 0}
   chopSpot: {fileID: 0}
+  ourImage: {fileID: 2603678894950698424}
+  nextImages:
+  - {fileID: -998581827, guid: f95227f9306b7414b9014eaf9fc85da8, type: 3}
+  - {fileID: 279139372, guid: 8c4db3bcb0dad1e4990eba70d9bffc97, type: 3}
+  - {fileID: -1271295629, guid: 0c843e9085a85484e874cd7ef9413405, type: 3}
   ifWater: {fileID: 0}
+  isPot: 0
+  hasBeans: 0
 --- !u!1 &2603678894975419880
 GameObject:
   m_ObjectHideFlags: 0

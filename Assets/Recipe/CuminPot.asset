@@ -16,3 +16,4 @@ MonoBehaviour:
   neededSpot: 1
   isChoppingGame: 0
   shouldHide: 0
+  changeSpotImage: 1

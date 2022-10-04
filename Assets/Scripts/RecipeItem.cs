@@ -64,10 +64,8 @@ public class RecipeItem : DraggableImage
     public void HideFood()
     {
         //okay i guess we could also do something like play a dotween animation for the pot or something?
-
         lastPosition = KitchenManager.Instance.hideSpot.transform.position;
         transform.position = lastPosition;
-
     }
 
     public void TransformFood()

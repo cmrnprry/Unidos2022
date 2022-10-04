@@ -9,4 +9,5 @@ public class RecipeStepScriptableObject : ScriptableObject
     public KitchenPoint neededSpot;
     public bool isChoppingGame;
     public bool shouldHide;
+    public bool changeSpotImage;
 }

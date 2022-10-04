@@ -51,10 +51,13 @@ public class KitchenManager : Singleton<KitchenManager>
     public KitchenTool choppingBoard;
     public RecipeItem choppedItem;
 
+    public KitchenTool ricePan;
+
     public KitchenTool? lastToolHovered;
     public RecipeItem? currentItem;
 
     public RecipeItem? choppingItem;
+
 
     //need this since one of the recipes is water and we need to transform one and then the other is gonna become a
     //regular recipe item
@@ -115,6 +118,7 @@ public class KitchenManager : Singleton<KitchenManager>
                     var tmp = currentSteps.Where(p => p.startedFood == food && p.neededSpot == lastToolHovered?.point);
                     if (tmp.Any())
                     {
+                        var currentStepDone = tmp.First();
                         if (lastToolHovered.canSizzle)
                         {
                             GameObject.Find("Audio Controller").GetComponent<AudioController>().PlaySizzle();//ff
@@ -127,7 +131,7 @@ public class KitchenManager : Singleton<KitchenManager>
                             choppingItem = currentItem;
                         }
 
-                        if (tmp.First().shouldHide)
+                        if (currentStepDone.shouldHide)
                         {
                             //hide item?
                             if(choppedItem != null && currentItem == choppedItem)
@@ -139,7 +143,15 @@ public class KitchenManager : Singleton<KitchenManager>
                             currentItem.HideFood();
                             
                         }
-                        currentSteps.Remove(tmp.First());
+                        if(currentStepDone.changeSpotImage)
+                        {
+                            if(currentStepDone.startedFood == Food.Beans)
+                            {
+                                lastToolHovered.hasBeans = true;
+                            }
+                            lastToolHovered.NextImage();
+                        }
+                        currentSteps.Remove(currentStepDone);
                         //update tool to be next image?
 
                         //Okay since we step out of the function we have to do this last i believe
@@ -157,6 +169,11 @@ public class KitchenManager : Singleton<KitchenManager>
                 else if (currentSteps.Count == 0)
                 {
                     waitingForNextStep = true;
+                    //We know the final step is this.
+                    if(recipeSteps.Count == 0)
+                    {
+                        ricePan.NextImage();
+                    }
                 }
 
             }
@@ -172,6 +189,7 @@ public class KitchenManager : Singleton<KitchenManager>
            lastToolHovered = null;
            waterFlag = false;
         }
+        
     }
     public void ResetToolHovered()
     {
@@ -208,7 +226,6 @@ public class KitchenManager : Singleton<KitchenManager>
         else
         {
             recipesFinished = true;
-            //textbox.text = "Done!";
         }
 
     }

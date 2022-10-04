@@ -20,6 +20,9 @@ public class LivinngRoomManager : MonoBehaviour
 
     public GameObject placingObjects;
     public GameObject fakeCousins;
+    public GameObject PictureButton;
+
+    public GameObject thanksForPlaying;
     // THis is hard coded im sorry
     // So basically make a variable for the decor question
     // and make a list of the places the player can place the decor
@@ -80,6 +83,7 @@ public class LivinngRoomManager : MonoBehaviour
 
 
     public void SnapPicture() {
+        PictureButton.SetActive(false);
         pictureFlash.gameObject.SetActive(true);
         Sequence picture = DOTween.Sequence().
             Append(pictureFlash.DOFade(1f, 0.25f).OnComplete(() => pictureFlash.gameObject.SetActive(false))).
@@ -88,6 +92,13 @@ public class LivinngRoomManager : MonoBehaviour
             (new Vector3(0.75f, 0.75f, 0.75f), 1));
         picture.Play();
         GameObject.Find("Audio Controller").GetComponent<AudioController>().PlayCameraPic();//ff
+        StartCoroutine(DisplayThanksForPlaying());
+    }
+
+    public IEnumerator DisplayThanksForPlaying()
+    {
+        yield return new WaitForSeconds(7f);
+        thanksForPlaying.SetActive(true);
     }
 
     public void showPlaces()

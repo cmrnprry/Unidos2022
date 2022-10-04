@@ -52,11 +52,11 @@ Go help them, mijita. #speaker: Abuelita #prompt: right
 
 ¡Gracias a dios! I can’t get this zipper up. #speaker: aunt
 I need your tiny fingers. #speaker: aunt
-Alberto, don’t move. #speaker: aunt #WaitUntil 
+Alberto, don’t move. #speaker: aunt #RemoveBarrier
 
 //During the minigame:
 ¡Ay, cuidado! You’re going to get me. #speaker: uncle
-¡Shh! #speaker: aunt
+¡Shh! #speaker: aunt #WaitUntil 
 
 //When you zip it up all the way:
 Ah! Finally. Gracias, mija. #speaker: aunt-h

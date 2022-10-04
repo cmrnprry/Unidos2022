@@ -4,7 +4,7 @@ VAR signChoice = false
 
 Gracias mamá for helping me with dinner. #speaker: Abuelita
 If you don't find what we need, look in the fridge or the cabinet. #speaker: Abuelita
-First, we need to cook the rice. #speaker: Abuelita 
+First, we need to prepare for the rice and beans. #speaker: Abuelita 
 Can you grab the <color=red>olive oil</color> and pour some into the <color=blue>pot</color> for the frijoles? #speaker: Abuelita #WaitUntil #Recipe: 1
 //– do the action –
 Next, we need the <color=red>vegetable oil</color> for the rice in the <color=green>frying pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 1

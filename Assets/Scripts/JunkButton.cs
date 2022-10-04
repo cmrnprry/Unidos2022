@@ -69,6 +69,24 @@ public class JunkButton : MonoBehaviour
                 var pos = new Vector3(button.position.x, floor, 0f);
                 seq.Append(button.DOMove(pos, 1f, false));
             }
+
+            if (button.position.y < floor)
+            {
+                var pos = new Vector3(button.position.x, floor, 0f);
+                seq.Append(button.DOMove(pos, 1f, false));
+            }
+
+            if (button.position.x < 0)
+            {
+                var pos = new Vector3(20f, button.position.y,0f);
+                seq.Append(button.DOMove(pos, 1f, false));
+            }
+
+            if (button.position.x > Screen.width)
+            {
+                var pos = new Vector3(Screen.width-20f, button.position.y,0f);
+                seq.Append(button.DOMove(pos, 1f, false));
+            }
         }
 
     }

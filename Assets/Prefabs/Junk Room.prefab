@@ -890,6 +890,7 @@ MonoBehaviour:
   anim: {fileID: 537664697029760393}
   zipper: {fileID: 537664696467916513}
   tag: {fileID: 537664695319816798}
+  alreadyClicked: 0
   barrier: {fileID: 3084571219277552603}
   CLOSED: {x: 0, y: 700, z: 0}
   OPEN: {x: 0, y: 200, z: 0}
@@ -898,6 +899,7 @@ MonoBehaviour:
   StateThree: 550
   zipped: 0
   zip: 0
+  clickRunning: 0
   zipSounds:
   - {fileID: 537664697025960083}
   - {fileID: 537664697025960087}
@@ -914,7 +916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 537664695726690950}
-  floor: 30
+  floor: 250
   buttons: {fileID: 537664696836340679}
   zipper: {fileID: 537664696467916542}
   zipperOther: {fileID: 537664697029760390}
@@ -2503,8 +2505,8 @@ MonoBehaviour:
   - {fileID: 8984547161501532843}
   - {fileID: 4840025970828141934}
   m_Bounds:
-    m_Center: {x: 9.681492, y: 8.065958, z: 0}
-    m_Extent: {x: 9.646963, y: 7.925979, z: 0}
+    m_Center: {x: 9.66173, y: 7.9276304, z: 0}
+    m_Extent: {x: 9.646962, y: 7.9259796, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0

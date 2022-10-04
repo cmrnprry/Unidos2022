@@ -124,7 +124,7 @@ Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUnti
 
 //– do the action – 
 
-Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 3
+Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 4
 
 //– do the action – 
 

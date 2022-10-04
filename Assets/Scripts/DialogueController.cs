@@ -51,6 +51,7 @@ public class DialogueController : MonoBehaviour
     public AudioClip talkingSfx; //FF
     private AudioSource audioSource; //FF
     public GameObject settings;
+    public GameObject backgrounTextBox; 
 
     private void Awake()
     {
@@ -208,8 +209,10 @@ public class DialogueController : MonoBehaviour
                     break;
 
                 case "PictureTime":
-                    livingRoom.SnapPicture();
+                    livingRoom.showPlaces();
+                    backgrounTextBox.gameObject.SetActive(false);
                     //turn off text box
+                    textbox.gameObject.SetActive(false);
                     //hand written text
                     break;
                 case "ButtonTime":

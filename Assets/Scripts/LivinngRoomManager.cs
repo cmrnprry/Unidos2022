@@ -30,38 +30,49 @@ public class LivinngRoomManager : MonoBehaviour
         //where to put the birthday sign
         if (pick && (choice == "signChoice"))
         {
-           //door
+            Debug.Log("sign0");
+            //door
             firstPlacement[0].gameObject.SetActive(true);
-            return;
+   
+            
         }
         //wall
-        else { firstPlacement[1].gameObject.SetActive(true); return; }
+        else if (!pick && (choice == "signChoice"))
+        {
+            Debug.Log("sign1");
+            firstPlacement[1].gameObject.SetActive(true);
+
+        }
 
 
         //Wheree to put baloons
         if (pick && (choice == "baloonChoice"))
         {
+            Debug.Log("baloonn");
             //chair
             secondPlacement[0].gameObject.SetActive(true);
             secondPlacement[1].gameObject.SetActive(true);
-            return;
+         
         }
-        else {
-
+        else if (!pick && (choice == "baloonChoice"))
+        {
+            Debug.Log("baloonn");
             secondPlacement[2].gameObject.SetActive(true);
             secondPlacement[3].gameObject.SetActive(true);
-            return;
+         
         }
 
         if (pick && (choice == "stramerChoice"))
         {
             //TV
+            Debug.Log("Streamer");
             thirdPlacement[0].gameObject.SetActive(true);
-            return;
+   
         }
-        else{  //table
+        else if (!pick && (choice == "stramerChoice"))
+        {  //table
+            Debug.Log("Streamer");
             thirdPlacement[1].gameObject.SetActive(true);
-            return;
         }
 
 

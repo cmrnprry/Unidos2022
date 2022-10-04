@@ -915,7 +915,7 @@ MonoBehaviour:
   zipper: {fileID: 537664696467916542}
   zipperOther: {fileID: 537664697029760390}
   Uncle: {fileID: 7256565919122686289}
-  barney: {fileID: 21300000, guid: fe1e31d4f4754e646a41978077cdadd2, type: 3}
+  barney: {fileID: 21300000, guid: d2b9fc35d0fb65645b90ab0100230428, type: 3}
 --- !u!82 &537664697025960083
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1765,8 +1765,8 @@ MonoBehaviour:
   - {fileID: 2026653045628363113}
   - {fileID: 4204078409443729920}
   m_Bounds:
-    m_Center: {x: 0.07712364, y: -5.2522783, z: 0}
-    m_Extent: {x: 9.67743, y: 10.94768, z: 0}
+    m_Center: {x: 0.07712269, y: -5.2523384, z: 0.0000019073486}
+    m_Extent: {x: 9.677429, y: 10.9476795, z: 1.7053026e-13}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0

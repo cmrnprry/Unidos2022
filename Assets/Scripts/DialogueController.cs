@@ -51,9 +51,11 @@ public class DialogueController : MonoBehaviour
     public AudioClip talkingSfx; //FF
     private AudioSource audioSource; //FF
     public GameObject settings;
-    public GameObject backgrounTextBox; 
+    public GameObject backgrounTextBox;
 
-    
+    [SerializeField]
+    public TextMeshProUGUI speakerHolder; //A TextBox for a Sprite 
+    private const string SpriteAdd = "<sprite name=\"{0}\">";
 
     private void Awake()
     {
@@ -118,7 +120,7 @@ public class DialogueController : MonoBehaviour
             AudioController.instance.SetAudio(index);
             yield return new WaitForEndOfFrame();
             FadeToBlack(false);
-
+            ClearSpeaker();
             yield return new WaitForSeconds(1f);
             anim.gameObject.SetActive(false);
         }
@@ -196,6 +198,7 @@ public class DialogueController : MonoBehaviour
             {
                 case "speaker":
                     string character = split[1];
+                    SetSpeaker(character);
                     break;
 
                 case "prompt":
@@ -228,6 +231,43 @@ public class DialogueController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void SetSpeaker(string character)
+    {
+        var tmpChar = "";
+        switch (character.Trim())
+        {
+
+            case "Abuelita":
+                tmpChar = "abuelita";
+                break;
+            case "aunt":
+                tmpChar = "aunt";
+                break;
+            case "aunt-h":
+                tmpChar = "aunt-h";
+                break;
+            case "Cousin1":
+                tmpChar = "cousin-1";
+                break;
+            case "Cousin2":
+                tmpChar = "cousin-2";
+                break;
+            case "uncle":
+                tmpChar = "uncle";
+                break;
+            default:
+                //just set it to grandma no harm
+                tmpChar = "abuelita";
+                break;
+        }
+        speakerHolder.text = string.Format(SpriteAdd, tmpChar);
+    }
+
+    public void ClearSpeaker()
+    {
+        speakerHolder.text = "";
     }
 
     public void SetBool(bool value)

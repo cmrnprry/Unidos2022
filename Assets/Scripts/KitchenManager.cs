@@ -255,22 +255,25 @@ public class KitchenManager : Singleton<KitchenManager>
 
     }
 
+
     public void WaterStep(KitchenTool kt)
     {
         waterFlag = true;
         //Okay on water step we do two things.
-        waterSource.Remove(kt.gameObject);
+
         kt.ifWater.enabled = true;
         kt.ifWater.TransformFood();
         kt.gameObject.transform.SetParent(kt.ifWater.OrigParent.transform);
+        kt.enabled = false;
 
+        /*
         var tmpWater = waterSource[0].GetComponent<KitchenTool>();
         tmpWater.ifWater.enabled = true;
         tmpWater.gameObject.transform.SetParent(tmpWater.ifWater.OrigParent.transform);
 
-        kt.enabled = false;
+        
         tmpWater.enabled = false;
-
+        */
     }
     public void ResetCabinets()
     {

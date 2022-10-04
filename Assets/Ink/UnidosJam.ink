@@ -3,6 +3,7 @@ VAR baloonChoice = false
 VAR signChoice = false
 
 Gracias mamá for helping me with dinner. #speaker: Abuelita
+If you don't find what we need, look in the fridge or the cabinet. #speaker: Abuelita
 First, we need to cook the rice. #speaker: Abuelita 
 Can you grab the <color=red>olive oil</color> and pour some into the <color=blue>pot</color> for the frijoles? #speaker: Abuelita #WaitUntil #Recipe: 1
 //– do the action –
@@ -58,13 +59,13 @@ Alberto, don’t move. #speaker: aunt #WaitUntil
 ¡Shh! #speaker: aunt
 
 //When you zip it up all the way:
-Ah! Finally. Gracias, mija. #speaker: aunt
-You can go back to helping grandma now. #speaker: aunt #prompt: left
+Ah! Finally. Gracias, mija. #speaker: aunt-h
+You can go back to helping grandma now. #speaker: aunt-h #prompt: left
 
 //exclamation prompt –
 
 You’re back, finally! Pues… #speaker: Abuelita
-Add the <color=red>beans</color>, some <color=red>water</color>, <color=red>cilantro</color>, <color=red>cumin</color> and <color=red>salt</color> to the <color=blue>pot</color>. #speaker: Abuelita #WaitUntil #Recipe: 4
+Add the <color=red>beans</color>, <color=red>cilantro</color>, <color=red>cumin</color> and <color=red>salt</color> to the <color=blue>pot</color>. #speaker: Abuelita #WaitUntil #Recipe: 4
 
 //– do the action –
 
@@ -79,7 +80,7 @@ Can you find it? #speaker: aunt #WaitUntil
 
 //– do the action – find the button –
 
-You’re a lifesaver! #speaker: aunt
+You’re a lifesaver! #speaker: aunt-h
 
 ¡El arroz! #speaker: Abuelita #prompt: left 
 
@@ -97,13 +98,12 @@ Priiimmmaaa! #speaker: Cousin2
 Oy. #speaker: Abuelita #prompt: left 
 
 //– exclamation prompt –
-
 Ok, this time around… Los globos. #speaker: Cousin2
 What do you think? Tied to the chairs? #speaker: Cousin2
 Or taped to the wall? #speaker: Cousin1
 
 * [tied to the chairs]
-    ~ baloonChoice = false
+    ~ baloonChoice = true
     Finally!! Someone with taste. #speaker: Cousin2
 
 * [taped to the wall]
@@ -124,7 +124,7 @@ Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUnti
 
 //– do the action – 
 
-Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 5
+Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 3
 
 //– do the action – 
 

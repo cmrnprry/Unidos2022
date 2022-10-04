@@ -821,6 +821,7 @@ MonoBehaviour:
   talkingSfx: {fileID: 0}
   settings: {fileID: 0}
   backgrounTextBox: {fileID: 0}
+  speakerHolder: {fileID: 0}
 --- !u!114 &2188182722968361343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,7 +1322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2188182723276306506
 Transform:
   m_ObjectHideFlags: 0

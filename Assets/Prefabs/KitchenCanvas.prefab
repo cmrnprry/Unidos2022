@@ -742,7 +742,6 @@ MonoBehaviour:
   ourImage: {fileID: 0}
   nextImages: []
   ifWater: {fileID: 2603678892908766468}
-  isPot: 0
   hasBeans: 0
 --- !u!1 &2603678893029655733
 GameObject:
@@ -912,7 +911,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7523009828db5d748bb90db1a00a0109, type: 2}
   - {fileID: 11400000, guid: 83b395c1a45d4044aa4f22c36e7257d7, type: 2}
   - {fileID: 11400000, guid: 7651bc997a254f543ac0307e7ed15842, type: 2}
-  - {fileID: 11400000, guid: 217533ada0b6d0241bdb7e3deb1023b7, type: 2}
   - {fileID: 11400000, guid: 81ad2002cc76ed1428c3d54b9b5b7084, type: 2}
   currentSteps: []
   waitingForNextStep: 0
@@ -2645,7 +2643,6 @@ MonoBehaviour:
   - {fileID: -1396957467, guid: 8c58f876903e38f4591382c9df4c5780, type: 3}
   - {fileID: -1203441874, guid: 402c59bc87beaa84fabed494c07b74b8, type: 3}
   ifWater: {fileID: 0}
-  isPot: 1
   hasBeans: 0
 --- !u!1 &2603678894178159177
 GameObject:
@@ -2742,7 +2739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2603678894277226974
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2847,7 +2844,6 @@ MonoBehaviour:
   ourImage: {fileID: 0}
   nextImages: []
   ifWater: {fileID: 2603678894277226975}
-  isPot: 0
   hasBeans: 0
 --- !u!1 &2603678894345846927
 GameObject:
@@ -2987,7 +2983,6 @@ MonoBehaviour:
   ourImage: {fileID: 0}
   nextImages: []
   ifWater: {fileID: 0}
-  isPot: 0
   hasBeans: 0
 --- !u!1 &2603678894562575302
 GameObject:
@@ -3443,7 +3438,6 @@ MonoBehaviour:
   - {fileID: 279139372, guid: 8c4db3bcb0dad1e4990eba70d9bffc97, type: 3}
   - {fileID: -1271295629, guid: 0c843e9085a85484e874cd7ef9413405, type: 3}
   ifWater: {fileID: 0}
-  isPot: 0
   hasBeans: 0
 --- !u!1 &2603678894975419880
 GameObject:

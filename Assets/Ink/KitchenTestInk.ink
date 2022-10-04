@@ -19,10 +19,12 @@ Add the <color=red>beans</color>, <color=red>cilantro</color>, <color=red>cumin<
 
 It almost burned, but good thing you have grandma to watch out. #speaker: Abuelita
 Add <color=red>water</color> and <color=red>chicken seasoning</color> to make a broth and add it to the <color=green>rice</color>. #speaker: Abuelita #WaitUntil #Recipe: 2
- 
+
 Stay here with me! #speaker: Abuelita
 Chop more <color=red>garlic</color> for me, please. #speaker: Abuelita #WaitUntil #Recipe: 2
 
-Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>water</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 5
+//– do the action – 
+
+Now,add <color=red>garlic</color>, <color=red>tomato sauce</color>, <color=red>cumin</color>, and <color=red>salt</color>. All in the <color=green>rice pan</color>. #speaker: Abuelita #WaitUntil #Recipe: 3
 
 End of the test. #speaker: Abuelita

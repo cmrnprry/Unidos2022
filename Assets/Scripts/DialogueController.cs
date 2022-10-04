@@ -53,6 +53,8 @@ public class DialogueController : MonoBehaviour
     public GameObject settings;
     public GameObject backgrounTextBox;
 
+    public bool FakeClick = false;
+
     [SerializeField]
     public TextMeshProUGUI speakerHolder; //A TextBox for a Sprite 
     private const string SpriteAdd = "<sprite name=\"{0}\">";
@@ -200,7 +202,6 @@ public class DialogueController : MonoBehaviour
                     string character = split[1];
                     SetSpeaker(character);
                     break;
-
                 case "prompt":
                     side = split[1].Trim();
                     //set the side
@@ -327,7 +328,7 @@ public class DialogueController : MonoBehaviour
         //currentTextbox.alpha = 225;
         isTyping = false;
         yield return new WaitForFixedUpdate();
-        yield return new WaitUntil(() => Input.GetButtonDown("Continue"));
+        yield return new WaitUntil(() => CheckClicks());
         coroutine = StartCoroutine(ShowNextLine());
     }
 
@@ -359,7 +360,16 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-
+    bool CheckClicks()
+    {
+        if(FakeClick || Input.GetButtonDown("Continue"))
+        {
+            FakeClick = false;
+            return true;
+        }
+        return false;
+        
+    }
 
     // When we click the choice button, tell the story to choose that choice!
     void OnClickChoiceButton(Choice choice)

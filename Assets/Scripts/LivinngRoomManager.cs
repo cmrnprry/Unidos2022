@@ -19,7 +19,7 @@ public class LivinngRoomManager : MonoBehaviour
     public List<GameObject> thirdPlacement;
 
     public GameObject placingObjects;
-
+    public GameObject fakeCousins;
     // THis is hard coded im sorry
     // So basically make a variable for the decor question
     // and make a list of the places the player can place the decor
@@ -92,6 +92,7 @@ public class LivinngRoomManager : MonoBehaviour
 
     public void showPlaces()
     {
+        fakeCousins.SetActive(false);
         placingObjects.SetActive(true);
     }
 

@@ -12,6 +12,8 @@ public class Zipper : Singleton<Zipper>
     public RectTransform zipper;
     public RectTransform tag;
 
+    public bool alreadyClicked = false;
+
     [SerializeField]
     public GameObject barrier;
 
@@ -25,8 +27,12 @@ public class Zipper : Singleton<Zipper>
 
     public bool zipped = false;
     public bool zip = false;
+    public bool clickRunning = false;
+
     private Sequence seqMovvement = null;
     private Sequence seqRotation = null;
+
+
 
     [SerializeField]
     AudioSource[] zipSounds;
@@ -40,20 +46,42 @@ public class Zipper : Singleton<Zipper>
         StartCoroutine(ZipperLoop());
     }
 
+    IEnumerator ClickTimer()
+    {
+        DialogueController.instance.FakeClick = true;
+        clickRunning = true;
+        yield return new WaitForSeconds(2f);
+        clickRunning = false;
+    }
+
+
+
     private void Update()
     {
+        if(zip && !zipped && !DialogueController.instance.exclaimation.activeSelf)
+        {
+            if (!clickRunning)
+            {
+                StartCoroutine(ClickTimer());
+            }
+            DialogueController.instance.SetBool(false);
+        }
         //Debug.Log(Input.mousePosition.y);
         //check if reached end
         if (Current == CLOSED.y && zipper.position.y >= CLOSED.y - 10f && !zip)
         {
-            DialogueController.instance.SetBool(false);
             zip = true;
+            if (!clickRunning)
+            {
+                StartCoroutine(ClickTimer());
+            }
            
         }
         else
         {
             if (CanDrag && (Input.mousePosition.y > OPEN.y && Input.mousePosition.y <= Current))
             {
+               // DialogueController.instance.FakeClick=true;
                 Resistance(ProgressState);
                 int x = Random.Range(0,2);//ff
                   if(!zipSounds[0].isPlaying && !zipSounds[1].isPlaying){

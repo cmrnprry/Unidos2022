@@ -5510,10 +5510,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 700605416, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
+      propertyPath: m_Volume
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140178573, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
+      propertyPath: m_Volume
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140178574, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
+      propertyPath: m_Volume
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1140178574, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: -2999200005716749530, guid: 8f34405f2daf30a4fb89db0cb78910a9, type: 2}
+    - target: {fileID: 1140178575, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
+      propertyPath: m_Volume
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602113746179581187, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841695459283612381, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
+      propertyPath: m_Volume
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4116280189592652384, guid: 1768b5d1583333e42b416b9919808dae, type: 3}
       propertyPath: mixer
       value: 

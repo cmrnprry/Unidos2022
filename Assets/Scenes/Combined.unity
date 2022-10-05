@@ -3395,7 +3395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a137300e756def4782ac2bcae60a533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ink: {fileID: 4900000, guid: 4009fbc2a6b3e2f47b6df1b8d1e59988, type: 3}
+  ink: {fileID: 4900000, guid: bfe8c80940e1b3041a8dbfba3921b85e, type: 3}
   wait: 0.01
   textbox: {fileID: 1186032702}
   anim: {fileID: 1332201110}

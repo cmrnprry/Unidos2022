@@ -99,7 +99,7 @@ public class KitchenManager : Singleton<KitchenManager>
     {
         if(!waitForDialogueManager)
         {
-            if(lastToolHovered != null)
+            if(lastToolHovered != null && choppingItem == null)
             {
                 //hate this but gotta love that it works
                 Vector3[] corners = new Vector3[4];
@@ -127,8 +127,9 @@ public class KitchenManager : Singleton<KitchenManager>
                         if (lastToolHovered.isChopper)
                         {
                             currentItem.lastPosition = lastToolHovered.chopSpot.position;
-                            currentItem.isChopping = true;
+                            currentItem.StartChop();
                             choppingItem = currentItem;
+                            
                         }
 
                         if (currentStepDone.shouldHide)

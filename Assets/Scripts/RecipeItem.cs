@@ -26,12 +26,13 @@ public class RecipeItem : DraggableImage
     public void OnChopped()
     {
         isChopping = false;
+        curImage.raycastTarget = true;
         TransformFood();
 
         transform.SetParent(OrigParent.transform);
         transform.position = lastPosition;
-       
     }
+
     public override void OnPointerDown(PointerEventData data)
     {
         if (!isChopping)
@@ -74,5 +75,9 @@ public class RecipeItem : DraggableImage
         curImage.sprite = transformedSprite;
     }
 
-
+    public void StartChop()
+    {
+        curImage.raycastTarget = false;
+        isChopping = true;
+    }
 }
